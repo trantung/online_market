@@ -7,9 +7,10 @@ class ApiSettingController extends ApiController {
 	 *
 	 * @return Response
 	 */
-	public function index($id)
+	public function index()
 	{
-		return Common::returnData(200, SUCCESS, $input['user_id'], $input['session_id'], Common::getHeader());
+		$input = Input::all();
+		return Common::returnData(200, SUCCESS, $input['user_id'], $input['session_id'], CommonSetting::getSettingMenu());
 	}
 
 }

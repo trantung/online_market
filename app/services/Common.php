@@ -72,4 +72,10 @@ class Common {
 		return false;
 	}
 
+	public static function getCategory()
+	{
+		$data = Common::getListArray('Category', ['id', 'name']);
+		return $data;
+	}
+
 }

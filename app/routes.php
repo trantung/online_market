@@ -44,13 +44,13 @@ Route::group(['prefix' => 'api'], function () {
 	Route::get('/', 'MainController@index');
 
 	//setting
-	Route::get('/setting', 'ApiSettingController@index');
+	Route::post('/setting', 'ApiSettingController@index');
 
 	//list category
-	Route::get('/category', 'ApiCategoryController@index');
+	Route::post('/category', 'ApiCategoryController@index');
 
 	//list products following category->finish
-	Route::post('/category/{id}', 'ApiCategoryController@index');
+	Route::post('/category/{id}', 'ApiCategoryController@show');
 
 	//detail product
 	Route::post('/product/{id}', 'ApiProductController@index');

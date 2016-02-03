@@ -20,7 +20,7 @@ class ApiFavoriteController extends ApiController {
 													'type_favorite' => TYPE_FAVORITE_LIKE
 												]);
 		$user = User::whereIn('id', $favorites)->select(listFieldUser())->get();
-		$data = array_merge(['user'=>$user], Common::getHeader());
+		$data = ['user'=>$user];
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 	}
 

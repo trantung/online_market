@@ -13,8 +13,6 @@ class LoginController extends ApiController {
 		return Common::returnData(200, SUCCESS);
 	}
 
-<<<<<<< HEAD
-=======
 	public function loginSocial()
 	{
 		$input = Input::all();
@@ -40,5 +38,4 @@ class LoginController extends ApiController {
 		return Common::returnData(200, SUCCESS, $userId, $sessionId);
 	}
 
->>>>>>> fbcafdf7245adf47b3a509178fe26dffcce035a1
 }

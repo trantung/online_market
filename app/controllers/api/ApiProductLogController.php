@@ -20,7 +20,7 @@ class ApiProductLogController extends ApiController {
 													'type_favorite' => TYPE_FAVORITE_SAVE
 												]);
 		$product = Product::whereIn('id', $favorites)->select(listFieldProduct())->get();
-		$data = array_merge(['product'=>$product], Common::getHeader());
+		$data = ['product'=>$product];
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 	}
 

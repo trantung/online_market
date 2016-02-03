@@ -10,12 +10,6 @@ class CommonSearch {
 	public static function getSearch($input = array())
 	{
 		$result = Search::where(function ($query) use ($input){
-<<<<<<< HEAD
-			if (!empty($input['deleted'])) {
-				$query = $query->whereNotNull('deleted_at');
-			}
-=======
->>>>>>> fbcafdf7245adf47b3a509178fe26dffcce035a1
 			if (!empty($input['user_id'])) {
 				$query = $query->where('user_id', $input['user_id']);
 			}
@@ -39,11 +33,7 @@ class CommonSearch {
 			}
 			//lat long
 
-<<<<<<< HEAD
-		})->lists('id', 'name', 'price_id', 'category_id', 'user_id', 'type_id', 'start_date', 'lat', 'long', 'created_at');
-=======
 		})->select(listFieldSearch())->get();
->>>>>>> fbcafdf7245adf47b3a509178fe26dffcce035a1
 		return $result;
 	}
 

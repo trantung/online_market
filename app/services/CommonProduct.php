@@ -63,16 +63,14 @@ class CommonProduct {
 	public static function returnProduct($options = array())
 	{
 		$input = Input::all();
-		$product = CommonProduct::getProduct($options);
-		$data = ['product'=>$product];
+		$data = CommonProduct::getProduct($options);
 		return Common::returnData(200, SUCCESS, $input['user_id'], $input['session_id'], $data);
 	}
 
 	public static function returnProductDeleted()
 	{
 		$input = Input::all();
-		$product = CommonProduct::getProductDeleted($input);
-		$data = ['product'=>$product];
+		$data = CommonProduct::getProductDeleted($input);
 		return Common::returnData(200, SUCCESS, $input['user_id'], $input['session_id'], $data);
 	}
 

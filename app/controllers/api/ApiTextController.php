@@ -10,8 +10,7 @@ class ApiTextController extends ApiController {
 	public function index($id)
 	{
 		$input = Input::all();
-		$text = Text::where('id', $id)->select(['title', 'description'])->get();
-		$data = ['text'=>$text];
+		$data = Text::where('id', $id)->select(['title', 'description'])->get();
 		return Common::returnData(200, SUCCESS, $input['user_id'], $input['session_id'], $data);
 	}
 

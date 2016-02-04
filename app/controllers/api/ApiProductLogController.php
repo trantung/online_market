@@ -10,17 +10,13 @@ class ApiProductLogController extends ApiController {
 	public function index()
 	{
 		$input = Input::all();
-		$sessionId = Common::checkSessionId($input);
-		if (!$sessionId) {
-			throw new Prototype\Exceptions\UserSessionErrorException();
-		}
+		$sessionId = Common::checkSessionLogin($input);
 		$favorites = CommonFavorite::getFavorite([
 													'model_name' => 'Product',
 													'follow_id' => $input['user_id'],
 													'type_favorite' => TYPE_FAVORITE_SAVE
 												]);
-		$product = Product::whereIn('id', $favorites)->select(listFieldProduct())->get();
-		$data = ['product'=>$product];
+		$data = Product::whereIn('id', $favorites)->select(listFieldProduct())->get();
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 	}
 
@@ -33,10 +29,7 @@ class ApiProductLogController extends ApiController {
 	public function destroy($id)
 	{
 		$input = Input::all();
-		$sessionId = Common::checkSessionId($input);
-		if (!$sessionId) {
-			throw new Prototype\Exceptions\UserSessionErrorException();
-		}
+		$sessionId = Common::checkSessionLogin($input);
 		Favorite::where('model_name', 'Product')
 				->where('model_id', $id)
 				->where('follow_id', $input['user_id'])

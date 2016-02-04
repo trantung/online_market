@@ -78,4 +78,13 @@ class Common {
 		return $data;
 	}
 
+	public static function checkSessionLogin($input)
+	{
+		$sessionId = Common::checkSessionId($input);
+		if (!$sessionId) {
+			throw new Prototype\Exceptions\UserSessionErrorException();
+		}
+		return $sessionId;
+	}
+
 }

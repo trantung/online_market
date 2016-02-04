@@ -10,17 +10,13 @@ class ApiFavoriteController extends ApiController {
 	public function index()
 	{
 		$input = Input::all();
-		$sessionId = Common::checkSessionId($input);
-		if (!$sessionId) {
-			throw new Prototype\Exceptions\UserSessionErrorException();
-		}
+		$sessionId = Common::checkSessionLogin($input);
 		$favorites = CommonFavorite::getFavorite([
 													'model_name' => 'User',
 													'follow_id' => $input['user_id'],
 													'type_favorite' => TYPE_FAVORITE_LIKE
 												]);
-		$user = User::whereIn('id', $favorites)->select(listFieldUser())->get();
-		$data = ['user'=>$user];
+		$data = User::whereIn('id', $favorites)->select(listFieldUser())->get();
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 	}
 
@@ -33,10 +29,7 @@ class ApiFavoriteController extends ApiController {
 	public function destroy($id)
 	{
 		$input = Input::all();
-		$sessionId = Common::checkSessionId($input);
-		if (!$sessionId) {
-			throw new Prototype\Exceptions\UserSessionErrorException();
-		}
+		$sessionId = Common::checkSessionLogin($input);
 		Favorite::where('model_name', 'User')
 				->where('model_id', $id)
 				->where('follow_id', $input['user_id'])

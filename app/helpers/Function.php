@@ -40,6 +40,14 @@ function getFilename($filename = null)
 	return null;
 }
 
+//change filename to time
+function changeFileNameImage($filename)
+{
+	$now = strtotime(date('Y-m-d H:i:s'));
+	$extension = getExtension($filename);
+	return $now.'.'.$extension;
+}
+
 //Product type
 function getProductType($id) {
 	$arr = array(

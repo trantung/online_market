@@ -48,11 +48,18 @@ define('TYPE_FAVORITE_SAVE', 1);
 define('TYPE_FAVORITE_LIKE', 2);
 
 //define upload product image origin
-define('PRODUCT_UPLOAD_ORIGIN', '/images/products/origin');
-//define upload product image thumb
-define('PRODUCT_UPLOAD_AVATAR', '/images/products/avatar');
+define('PRODUCT_UPLOAD', '/images/users/products');
 //define upload user avatar
 define('USER_AVATAR', '/images/users/avatar');
+//define size avatar user
+define('USER_AVATAR_WIDTH', 200);
+define('USER_AVATAR_HEIGHT', 200);
+//define product size avatar
+define('PRODUCT_AVATAR_WIDTH', 300);
+define('PRODUCT_AVATAR_HEIGHT', 300);
+//define product size slide
+define('PRODUCT_SLIDE_WIDTH', 400);
+define('PRODUCT_SLIDE_HEIGHT', 500);
 
 
 

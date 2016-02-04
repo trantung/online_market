@@ -15,6 +15,7 @@ class ApiProductController extends ApiController {
 	public function saved($id)
 	{
 		$input = Input::all();
+		$sessionId = Common::checkSessionLogin($input);
 		Favorite::create([
 							'model_name' => 'Product',
 							'model_id' => $id,
@@ -27,11 +28,14 @@ class ApiProductController extends ApiController {
 	public function listStatus($status)
 	{
 		$input = Input::all();
+		$sessionId = Common::checkSessionLogin($input);
 		return CommonProduct::returnProduct(array('user_id'=>$input['user_id'], 'status'=>$status));
 	}
 
 	public function listHidden()
 	{
+		$input = Input::all();
+		$sessionId = Common::checkSessionLogin($input);
 		return CommonProduct::returnProductDeleted();
 	}
 

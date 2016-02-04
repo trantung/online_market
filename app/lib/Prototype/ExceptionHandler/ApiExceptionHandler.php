@@ -27,4 +27,8 @@ class ApiExceptionHandler {
         return $this->makeJsonResponse(404, "Email is wrong or registered");
     }
 
+    public function handlePasswordErrorException(){
+        return $this->makeJsonResponse(405, "Password is wrong");
+    }
+
 }

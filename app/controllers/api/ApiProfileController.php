@@ -19,14 +19,21 @@ class ApiProfileController extends ApiController {
 	{
 		$input = Input::all();
 		$sessionId = Common::checkSessionLogin($input);
+		$oldPassword = Input::get('old_password');
 		$updateInput = array(
 							'username' => $input['username'],
 							'phone' => $input['phone'],
 							'email' => $input['email'],
 							'avatar' => $input['avatar'],
 							'address' => $input['address'],
-							'password' => Hash::make($input['password'])
 						);
+		if(!empty($input['password']) || !empty($oldPassword)) {
+			if (!(Auth::user()->attempt(['id' => Input::get('user_id'), 'password' => $oldPassword]))){
+				throw new Prototype\Exceptions\PasswordErrorException();
+			} else {
+				$updateInput['password'] = Hash::make($input['password']);
+			}
+		}
 		User::find($input['user_id'])->update($updateInput);
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId);
 	}

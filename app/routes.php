@@ -119,7 +119,9 @@ Route::group(['prefix' => 'api'], function () {
 	//text hardcode: policy, introduce, contact
 	Route::post('/text/{id}', 'ApiTextController@index');
 
-	//upload images
+	//upload images user
 	Route::post('/upload_image', 'ApiUploadController@store');
+	//upload images product
+	Route::post('/upload_image/product', 'ApiUploadController@imageProduct');
 
 });

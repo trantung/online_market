@@ -60,6 +60,3 @@ define('PRODUCT_AVATAR_HEIGHT', 300);
 //define product size slide
 define('PRODUCT_SLIDE_WIDTH', 400);
 define('PRODUCT_SLIDE_HEIGHT', 500);
-
-
-

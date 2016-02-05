@@ -32,8 +32,13 @@ class CommonUpload {
 				$pathUpload = public_path() . $path . '/' . $input['user_id'];
 				$uploadSuccess = $value->move($pathUpload, $filename[$key]);
 				if ($key == 0) {
-					$image = Image::make(sprintf(''.$pathUpload.'/%s', $filename[$key]))
-						->resize(PRODUCT_AVATAR_WIDTH, PRODUCT_AVATAR_HEIGHT)->save();
+					if($type == 1) {
+						$image = Image::make(sprintf(''.$pathUpload.'/%s', $filename[$key]))
+							->resize(PRODUCT_AVATAR_WIDTH, PRODUCT_AVATAR_HEIGHT)->save();
+ 					} else {
+ 						$image = Image::make(sprintf(''.$pathUpload.'/%s', $filename[$key]))
+							->resize($width, $height)->save();
+ 					}
 				}
 				else {
 					$image = Image::make(sprintf(''.$pathUpload.'/%s', $filename[$key]))
@@ -42,7 +47,6 @@ class CommonUpload {
 
 			}
 			$data = $filename;
-			// dd($data);
 			return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 		}
         throw new Prototype\Exceptions\UploadErrorException();

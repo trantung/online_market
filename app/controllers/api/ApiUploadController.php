@@ -10,14 +10,13 @@ class ApiUploadController extends ApiController {
 	public function store()
 	{
 		$input = Input::all();
-		return CommonUpload::commonUploadImage($input, USER_AVATAR, USER_AVATAR_WIDTH, USER_AVATAR_HEIGHT);
-
+		return CommonUpload::commonUploadImage($input, USER_AVATAR, 2);
 	}
+
 	public function imageProduct()
 	{
 		$input = Input::all();
-		return CommonUpload::commonUploadImage($input, PRODUCT_UPLOAD, PRODUCT_SLIDE_WIDTH, PRODUCT_SLIDE_HEIGHT);
-
+		return CommonUpload::commonUploadImage($input, PRODUCT_UPLOAD, 1);
 	}
 
 }

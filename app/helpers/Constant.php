@@ -48,9 +48,9 @@ define('TYPE_FAVORITE_SAVE', 1);
 define('TYPE_FAVORITE_LIKE', 2);
 
 //define upload product image origin
-define('PRODUCT_UPLOAD', '/images/users/products');
+define('PRODUCT_UPLOAD', '/images/products');
 //define upload user avatar
-define('USER_AVATAR', '/images/users/avatar');
+define('USER_AVATAR', '/images/users');
 //define size avatar user
 define('USER_AVATAR_WIDTH', 200);
 define('USER_AVATAR_HEIGHT', 200);

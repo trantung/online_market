@@ -31,4 +31,8 @@ class ApiExceptionHandler {
         return $this->makeJsonResponse(405, "Password is wrong");
     }
 
+    public function handleUploadErrorException(){
+        return $this->makeJsonResponse(406, "Image upload is wrong");
+    }
+
 }

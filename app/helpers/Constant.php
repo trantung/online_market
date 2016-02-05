@@ -53,6 +53,3 @@ define('PRODUCT_UPLOAD_ORIGIN', '/images/products/origin');
 define('PRODUCT_UPLOAD_AVATAR', '/images/products/avatar');
 //define upload user avatar
 define('USER_AVATAR', '/images/users/avatar');
-
-
-

@@ -9,7 +9,8 @@ class ApiForgotPasswordController extends ApiController {
 	 */
 	public function index()
 	{
-		//
+		$input = Input::all();
+		return $input;
 	}
 
 }

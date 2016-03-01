@@ -25,14 +25,15 @@ class CommonProduct {
 			if (!empty($input['city_id'])) {
 				$query = $query->where('city_id', $input['city_id']);
 			}
-			if (!empty($input['position'])) {
-				$query = $query->where('position', $input['position']);
-			}
 			if (!empty($input['status'])) {
 				$query = $query->where('status', $input['status']);
 			}
 			if (!empty($input['name'])) {
 				$query = $query->where('name', 'like', '%'.$input['name'].'%');
+			}
+			if (!empty($input['time_id'])) {
+				$inputDate = getTime($input['time_id']);
+				$query = $query->where('start_time', '>=', $inputDate);
 			}
 			if (!empty($input['start_date'])) {
 				$query = $query->where('start_time', '>=', $input['start_date']);
@@ -63,7 +64,13 @@ class CommonProduct {
 	public static function returnProduct($options = array())
 	{
 		$input = Input::all();
-		$data = CommonProduct::getProduct($options);
+		// neu tra ve phone cua user so huu product
+		$user = User::find($options['user_id']);
+		if(isset($options['isPhone']) && count($user) > 0) {
+			$data = ['products' => CommonProduct::getProduct($options), 'phone' => $user->phone];	
+		} else {
+			$data = CommonProduct::getProduct($options);
+		}
 		return Common::returnData(200, SUCCESS, $input['user_id'], $input['session_id'], $data);
 	}
 

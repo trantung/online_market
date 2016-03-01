@@ -41,7 +41,7 @@ class ApiProductController extends ApiController {
 
 	public function listProductUser($id)
 	{
-		return CommonProduct::returnProduct(array('user_id'=>$id, 'status'=>1));
+		return CommonProduct::returnProduct(array('user_id'=>$id, 'status'=>1, 'isPhone' => 1));
 	}
 
 }

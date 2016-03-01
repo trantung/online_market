@@ -22,19 +22,91 @@ class CommonSearch {
 			if (!empty($input['price_id'])) {
 				$query = $query->where('price_id', $input['price_id']);
 			}
+			if (!empty($input['time_id'])) {
+				$query = $query->where('time_id', $input['time_id']);
+			}
 			if (!empty($input['name'])) {
 				$query = $query->where('name', 'like', '%'.$input['name'].'%');
-			}
-			if (!empty($input['start_date'])) {
-				$query = $query->where('start_date', '>=', $input['start_date']);
-			}
-			if (!empty($input['end_date'])) {
-				$query = $query->where('start_date', '<=', $input['end_date']);
 			}
 			//lat long
 
 		})->select(listFieldSearch())->get();
 		return $result;
+	}
+
+	//id = 0: click nut search tren top
+	//id > 0: click trong danh sach search da luu, id = search_id
+	public static function searchFormData($searchId = 0)
+	{
+		$priceArray = self::priceFormArray();
+		$categoryArray = self::categoryFormArray();
+		$typeArray = selectProductType();
+		$timeArray = selectProductTime();
+		$id = null;
+		$name = null;
+		$lat = null;
+		$long = null;
+		$price_id = null;
+		$category_id = null;
+		$type_id = null;
+		$time_id = null;
+		if($searchId > 0) {
+			$search = Search::find($searchId);
+			if(count($search) > 0) {
+				$id = $searchId;
+				$name = $search->name;
+				$lat = $search->lat;
+				$long = $search->long;
+				$price_id = $search->price_id;
+				$category_id = $search->category_id;
+				$type_id = $search->type_id;
+				$time_id = $search->time_id;
+			}
+		}
+		$data = array(
+				'id' => $id,
+				'name' => $name,
+				'lat' => $lat,
+				'long' => $long,
+				'price_id' => $price_id,
+				'category_id' => $category_id,
+				'type_id' => $type_id,
+				'time_id' => $time_id,
+				'priceArray' => $priceArray,
+				'categoryArray' => $categoryArray,
+				'typeArray' => $typeArray,
+				'timeArray' => $timeArray,
+			);
+		return $data;
+	}
+
+	public static function priceFormArray()
+	{
+		$obj = Price::all();
+		$array[''] = 'Không chọn';
+		if(count($obj) > 0) {
+			foreach($obj as $value) {
+				$array[$value->id] = priceArrangeString($value->min, $value->max);
+			}
+		}
+		return $array;
+	}
+
+	public static function categoryFormArray()
+	{
+		$obj = Category::all();
+		$array[''] = 'Tất cả danh mục';
+		if(count($obj) > 0) {
+			foreach($obj as $value) {
+				$array[$value->id] = $value->name;
+			}
+		}
+		return $array;
+	}
+
+	public static function searchFilter($input)
+	{
+		//
 	}
 
 }

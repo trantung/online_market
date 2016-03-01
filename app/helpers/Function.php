@@ -94,6 +94,28 @@ function generateRandomString($length = RANDOMSTRING) {
     return $randomString;
 }
 
+function fullPriceVnd($number)
+{
+    if ($number > 0)
+        $text = number_format($number, 0, ",", ".");
+    else
+        $text = 0;
+
+    return $text;
+}
+
+function priceArrangeString($min, $max = null)
+{
+	$string = '';
+	if(isset($min) && isset($max)) {
+		$string .= 'Từ ' . fullPriceVnd($min) . ' - ' . fullPriceVnd($max);
+	}
+	if(isset($min) && !isset($max)) {
+		$string .= 'Trên ' . fullPriceVnd($min);
+	}
+	return $string;
+}
+
 //list select field product
 function listFieldProduct()
 {
@@ -102,10 +124,50 @@ function listFieldProduct()
 
 function listFieldSearch()
 {
-	return ['id', 'name', 'price_id', 'category_id', 'user_id', 'type_id', 'start_date', 'lat', 'long', 'created_at'];
+	return ['id', 'name', 'price_id', 'category_id', 'user_id', 'type_id', 'time_id', 'lat', 'long', 'created_at'];
 }
 
 function listFieldUser()
 {
 	return ['id', 'facebook_id', 'google_id' , 'username', 'avatar', 'email', 'phone', 'address', 'lat', 'long', 'type', 'status', 'created_at'];
+}
+
+function getProductTime($id) {
+	$arr = array(
+		TIMEVALUE1 => TIME1,
+		TIMEVALUE2 => TIME2,
+		TIMEVALUE3 => TIME3,
+	);
+	return $arr[$id];
+}
+
+function selectProductTime()
+{
+	return array(
+		'' => '-- Lựa chọn',
+		TIMEVALUE1 => TIME1,
+		TIMEVALUE2 => TIME2,
+		TIMEVALUE3 => TIME3,
+	);
+}
+
+// tra ve time de so sanh tim kiem products
+function getTime($timeId)
+{
+	$rs = '';
+	switch ($timeId) {
+		case TIMEVALUE1:
+			$rs = date('Y-m-d 00:00:00');
+			break;
+		case TIMEVALUE2:
+			$rs = date('Y-m-d 00:00:00', strtotime('monday last week'));
+			break;
+		case TIMEVALUE3:
+			$rs = date("Y-m-d 00:00:00", strtotime("first day of previous month"));
+			break;
+		default:
+			$rs = date('Y-m-d 00:00:00');
+			break;
+	}
+	return $rs;
 }

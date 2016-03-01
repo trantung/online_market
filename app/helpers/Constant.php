@@ -60,3 +60,10 @@ define('PRODUCT_AVATAR_HEIGHT', 300);
 //define product size slide
 define('PRODUCT_SLIDE_WIDTH', 800);
 define('PRODUCT_SLIDE_HEIGHT', 600);
+//define time product
+define('TIME1', 'Hôm nay');
+define('TIME2', 'Từ tuần trước');
+define('TIME3', 'Từ tháng trước');
+define('TIMEVALUE1', 1);
+define('TIMEVALUE2', 2);
+define('TIMEVALUE3', 3);

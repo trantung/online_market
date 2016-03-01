@@ -65,8 +65,10 @@ class CommonProduct {
 	{
 		$input = Input::all();
 		// neu tra ve phone cua user so huu product
-		$user = User::find($options['user_id']);
-		if(isset($options['isPhone']) && count($user) > 0) {
+		if(isset($options['user_id'])) {
+			$user = User::find($options['user_id']);	
+		}
+		if(isset($options['user_id']) && isset($options['isPhone']) && count($user) > 0) {
 			$data = ['products' => CommonProduct::getProduct($options), 'phone' => $user->phone];	
 		} else {
 			$data = CommonProduct::getProduct($options);

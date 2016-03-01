@@ -75,6 +75,7 @@ class Common {
 	public static function getCategory()
 	{
 		$data = Common::getListArray('Category', ['id', 'name']);
+		$data = array_merge(['0'=>array('id'=>0, 'name'=>'Home')], $data);
 		return $data;
 	}
 

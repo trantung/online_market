@@ -28,7 +28,7 @@ class CommonUpload {
 				}
 
 			}
-			$data = $filename;
+			$data = ['image_url' => $filename[0]];
 			return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 		}
         throw new Prototype\Exceptions\UploadErrorException();

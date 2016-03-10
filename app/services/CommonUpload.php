@@ -5,6 +5,7 @@ class CommonUpload {
 	// type=2:upload avatar user
 	public static function commonUploadImage($input, $path, $type = null)
 	{
+		$data = null;
 		$sessionId = Common::checkSessionLogin($input);
 		if (isset($input['image_url'])) {
 			foreach ($input['image_url'] as $key => $value) {
@@ -26,9 +27,9 @@ class CommonUpload {
 					$image = Image::make(sprintf(''.$pathUpload.'/%s', $filename[$key]))
 						->resize(PRODUCT_SLIDE_WIDTH, PRODUCT_SLIDE_HEIGHT)->save();
 				}
+				$data[$key] = ['image_url' => $filename[$key]];
 
 			}
-			$data = ['image_url' => $filename[0]];
 			return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 		}
         throw new Prototype\Exceptions\UploadErrorException();

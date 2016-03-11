@@ -12,13 +12,13 @@ class ApiMessageController extends ApiController {
 		$input = Input::all();
 		$sessionId = Common::checkSessionLogin($input);
 		$data_sent = ApiMessage::join('users', 'messages.receiver_id', '=', 'users.id')
-					->select('messages.id', 'messages.receiver_id', 'messages.message', 'users.username', 'users.avatar')
+					->select('messages.id', 'messages.receiver_id', 'messages.message', 'messages.created_at', 'users.username', 'users.avatar')
 					->where('messages.sent_id', $input['user_id'])
 					->where('messages.status', ACTIVE)
 					->orderBy('messages.id', 'desc')
 					->get();
 		$data_recived = ApiMessage::join('users', 'messages.sent_id', '=', 'users.id')
-					->select('messages.id', 'messages.sent_id', 'messages.message', 'users.username', 'users.avatar')
+					->select('messages.id', 'messages.sent_id', 'messages.message', 'messages.created_at', 'users.username', 'users.avatar')
 					->where('messages.receiver_id', $input['user_id'])
 					->where('messages.status', ACTIVE)
 					->orderBy('messages.id', 'desc')
@@ -31,7 +31,12 @@ class ApiMessageController extends ApiController {
 	{
 		$input = Input::all();
 		$sessionId = Common::checkSessionLogin($input);
-		$data = ApiMessage::find($id);
+		$msg = ApiMessage::find($id);
+		if($msg->sent_id == $input['user_id'] || $msg->receiver_id == $input['user_id']) {
+			$data = $msg;
+		} else {
+			$data = null;
+		}
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 	}
 

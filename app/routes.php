@@ -99,7 +99,7 @@ Route::group(['prefix' => 'api'], function () {
 	//send chat offline
 	Route::post('/message/{id}/send', 'ApiMessageController@send');
 	//active status message
-	Route::post('/message/{id}/updateStatusMessage', 'ApiMessageController@updateStatusMessage');
+	Route::post('/message/{id}/active', 'ApiMessageController@active');
 
 	//send report, feedback
 	Route::post('/product/{id}/report', 'ApiReportController@post');

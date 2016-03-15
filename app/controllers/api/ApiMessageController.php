@@ -63,7 +63,7 @@ class ApiMessageController extends ApiController {
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId);
 	}
 
-	public function updateStatusMessage($id)
+	public function active($id)
 	{
 		$input = Input::all();
 		$sessionId = Common::checkSessionLogin($input);

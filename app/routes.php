@@ -98,6 +98,8 @@ Route::group(['prefix' => 'api'], function () {
 	Route::post('/message/{message_id}/delete', 'ApiMessageController@destroy');
 	//send chat offline
 	Route::post('/message/{id}/send', 'ApiMessageController@send');
+	//active status message
+	Route::post('/message/{id}/updateStatusMessage', 'ApiMessageController@updateStatusMessage');
 
 	//send report, feedback
 	Route::post('/product/{id}/report', 'ApiReportController@post');

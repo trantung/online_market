@@ -12,15 +12,15 @@ class ApiMessageController extends ApiController {
 		$input = Input::all();
 		$sessionId = Common::checkSessionLogin($input);
 		$data_sent = ApiMessage::join('users', 'messages.receiver_id', '=', 'users.id')
-					->select('messages.id', 'messages.receiver_id', 'messages.message', 'messages.created_at', 'users.username', 'users.avatar')
+					->select('messages.id', 'messages.receiver_id', 'messages.message', 'messages.status', 'messages.created_at', 'users.username', 'users.avatar')
 					->where('messages.sent_id', $input['user_id'])
-					->where('messages.status', ACTIVE)
+					// ->where('messages.status', ACTIVE)
 					->orderBy('messages.id', 'desc')
 					->get();
 		$data_recived = ApiMessage::join('users', 'messages.sent_id', '=', 'users.id')
-					->select('messages.id', 'messages.sent_id', 'messages.message', 'messages.created_at', 'users.username', 'users.avatar')
+					->select('messages.id', 'messages.sent_id', 'messages.message', 'messages.status', 'messages.created_at', 'users.username', 'users.avatar')
 					->where('messages.receiver_id', $input['user_id'])
-					->where('messages.status', ACTIVE)
+					// ->where('messages.status', ACTIVE)
 					->orderBy('messages.id', 'desc')
 					->get();
 		$data = ['data_sent' => $data_sent, 'data_recived' => $data_recived];
@@ -60,6 +60,17 @@ class ApiMessageController extends ApiController {
 				'status' => INACTIVE
 			];
 		ApiMessage::create($inputMsg);
+		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId);
+	}
+
+	public function updateStatusMessage($id)
+	{
+		$input = Input::all();
+		$sessionId = Common::checkSessionLogin($input);
+		$inputMsg = [
+				'status' => ACTIVE
+			];
+		ApiMessage::find($id)->update($inputMsg);
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId);
 	}
 

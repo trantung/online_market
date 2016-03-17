@@ -28,6 +28,7 @@ class ApiMessageController extends ApiController {
 	                $query->where('receiver_id', $input['user_id'])
 						 ->where('sent_id', $value);
 	            })
+	            ->orderBy('created_at', 'desc')
 				->first();
 			if($msg) {
 				$data[] = array(

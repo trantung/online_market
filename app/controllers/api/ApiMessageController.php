@@ -33,6 +33,7 @@ class ApiMessageController extends ApiController {
 			if($msg) {
 				$data[] = array(
 						'id' => $msg->id,
+						'chat_avatar' => 'chua co, dm hoi nhieu',
 						'chat_id' => $value,
 						'chat_name' => User::find($value)->username,
 						'message' => $msg->message,
@@ -59,11 +60,13 @@ class ApiMessageController extends ApiController {
 	        ->orderBy('created_at', 'desc')
 			->get();
 		foreach ($data as $key => $value) {
-			$test[$key] = $value;
+			$data[$key] = $value;
+			$data[$key]['chat_name'] = User::find($chatId)->username;
+			$data[$key]['chat_avatar'] = 'chua co, dm hoi nhieu';
 			if ($value->sent_id == $input['user_id']) {
-				$test[$key]['send'] = true;
+				$data[$key]['send'] = true;
 			} else {
-				$test[$key]['send'] = false;
+				$data[$key]['send'] = false;
 			}
 			// if ($data->sent_id == ) {
 			// 	# code...

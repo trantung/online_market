@@ -95,10 +95,13 @@ Route::group(['prefix' => 'api'], function () {
 	//list message
 	Route::post('/message/history/{chat_id}', 'ApiMessageController@history');
 	Route::post('/message', 'ApiMessageController@index');
+	//send message in the user interface
+	Route::post('/message/{id}/user', 'ApiMessageController@sendUser');
+
 	Route::post('/message/{message_id}/show', 'ApiMessageController@show');
 	Route::post('/message/{message_id}/delete', 'ApiMessageController@destroy');
-	//send chat offline
-	Route::post('/message/{id}/send', 'ApiMessageController@send');
+	//send chat offline in the product
+	Route::post('/message/{id}/send', 'ApiMessageController@sendProduct');
 	//active status message
 	Route::post('/message/{id}/active', 'ApiMessageController@active');
 

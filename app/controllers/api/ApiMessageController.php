@@ -11,43 +11,33 @@ class ApiMessageController extends ApiController {
 	{
 		$input = Input::all();
 		$sessionId = Common::checkSessionLogin($input);
-		$sessionId = Common::checkSessionLogin($input);
 		$data_sent = ApiMessage::where('sent_id', $input['user_id'])
-						->groupBy('receiver_id')
-						->lists('receiver_id');
+			->groupBy('receiver_id')
+			->lists('receiver_id');
 		$data_recived = ApiMessage::where('receiver_id', $input['user_id'])
-						->groupBy('sent_id')
-						->lists('sent_id');
-		// dd($data_sent);
-		// dd($data_recived);
+			->groupBy('sent_id')
+			->lists('sent_id');
 		$total = array_diff($data_recived, $data_sent);
 		$result = array_merge($total, $data_sent);
-		foreach($result as $value) {
-			
-			$msg =  ApiMessage::where(function($query)
-						{
-							$query->where('sent_id', $input['user_id'])
-								  ->where('receiver_id', $value);
-						})
-			            ->orWhere(function($query)
-			            {
-			                $query->where('receiver_id', $input['user_id'])
-								  ->where('sent_id', $value);
-			            })
-			            ->first();
-
+		foreach($result as $key => $value) {
+			$msg =  ApiMessage::where(function($query) use ($input, $value) {
+					$query->where('sent_id', $input['user_id'])
+						  ->where('receiver_id', $value);
+				})
+				->orWhere(function($query) use ($input, $value) {
+	                $query->where('receiver_id', $input['user_id'])
+						 ->where('sent_id', $value);
+	            })
+				->first();
 			if($msg) {
 				$data[] = array(
 						'id' => $msg->id,
-						'sent_id' => $msg->sent_id,
-						'receiver_id' => $msg->receiver_id,
-						'message' => $msg->message
+						'chat_id' => $value,
+						'message' => $msg->message,
+						'time' => date('Y-m-d', strtotime($msg->created_at)),
 					);
 			}
 		}
-		
-		dd($data);
-		$data = ['data_sent' => $data_sent, 'data_recived' => $data_recived];
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 	}
 

@@ -11,18 +11,42 @@ class ApiMessageController extends ApiController {
 	{
 		$input = Input::all();
 		$sessionId = Common::checkSessionLogin($input);
-		$data_sent = ApiMessage::join('users', 'messages.receiver_id', '=', 'users.id')
-					->select('messages.id', 'messages.receiver_id', 'messages.message', 'messages.status', 'messages.created_at', 'users.username', 'users.avatar')
-					->where('messages.sent_id', $input['user_id'])
-					// ->where('messages.status', ACTIVE)
-					->orderBy('messages.id', 'desc')
-					->get();
-		$data_recived = ApiMessage::join('users', 'messages.sent_id', '=', 'users.id')
-					->select('messages.id', 'messages.sent_id', 'messages.message', 'messages.status', 'messages.created_at', 'users.username', 'users.avatar')
-					->where('messages.receiver_id', $input['user_id'])
-					// ->where('messages.status', ACTIVE)
-					->orderBy('messages.id', 'desc')
-					->get();
+		$sessionId = Common::checkSessionLogin($input);
+		$data_sent = ApiMessage::where('sent_id', $input['user_id'])
+						->groupBy('receiver_id')
+						->lists('receiver_id');
+		$data_recived = ApiMessage::where('receiver_id', $input['user_id'])
+						->groupBy('sent_id')
+						->lists('sent_id');
+		// dd($data_sent);
+		// dd($data_recived);
+		$total = array_diff($data_recived, $data_sent);
+		$result = array_merge($total, $data_sent);
+		foreach($result as $value) {
+			
+			$msg =  ApiMessage::where(function($query)
+						{
+							$query->where('sent_id', $input['user_id'])
+								  ->where('receiver_id', $value);
+						})
+			            ->orWhere(function($query)
+			            {
+			                $query->where('receiver_id', $input['user_id'])
+								  ->where('sent_id', $value);
+			            })
+			            ->first();
+
+			if($msg) {
+				$data[] = array(
+						'id' => $msg->id,
+						'sent_id' => $msg->sent_id,
+						'receiver_id' => $msg->receiver_id,
+						'message' => $msg->message
+					);
+			}
+		}
+		
+		dd($data);
 		$data = ['data_sent' => $data_sent, 'data_recived' => $data_recived];
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 	}

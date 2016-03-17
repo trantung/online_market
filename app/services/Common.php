@@ -87,5 +87,16 @@ class Common {
 		}
 		return $sessionId;
 	}
-
+	public static function queryCommonMessage($input, $value)
+	{
+		$data = ApiMessage::where(function($query) use ($input, $value) {
+			$query->where('sent_id', $input['user_id'])
+				  ->where('receiver_id', $value);
+		})
+		->orWhere(function($query) use ($input, $value) {
+            $query->where('receiver_id', $input['user_id'])
+				 ->where('sent_id', $value);
+        });
+        return $data;
+	}
 }

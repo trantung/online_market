@@ -20,16 +20,8 @@ class ApiMessageController extends ApiController {
 		$total = array_diff($data_recived, $data_sent);
 		$result = array_merge($total, $data_sent);
 		foreach($result as $key => $value) {
-			$msg =  ApiMessage::where(function($query) use ($input, $value) {
-					$query->where('sent_id', $input['user_id'])
-						  ->where('receiver_id', $value);
-				})
-				->orWhere(function($query) use ($input, $value) {
-	                $query->where('receiver_id', $input['user_id'])
-						 ->where('sent_id', $value);
-	            })
-	            ->orderBy('created_at', 'desc')
-				->first();
+			$msg =  Common::queryCommonMessage($input, $value);
+			$msg = $msg->orderBy('created_at', 'desc')->first();
 			if($msg) {
 				$data[] = array(
 						'id' => $msg->id,
@@ -49,16 +41,9 @@ class ApiMessageController extends ApiController {
 	{
 		$input = Input::all();
 		$sessionId = Common::checkSessionLogin($input);
-		$data =  ApiMessage::where(function($query) use ($input, $chatId) {
-				$query->where('sent_id', $input['user_id'])
-					  ->where('receiver_id', $chatId);
-			})
-			->orWhere(function($query) use ($input, $chatId) {
-	            $query->where('receiver_id', $input['user_id'])
-					 ->where('sent_id', $chatId);
-	        })
-	        ->orderBy('created_at', 'desc')
-			->get();
+		$data = Common::queryCommonMessage($input, $chatId);
+	    $data->update(['status' => ACTIVE]);
+	    $data = $data->orderBy('created_at', 'desc')->get();
 		foreach ($data as $key => $value) {
 			$data[$key] = $value;
 			$data[$key]['chat_name'] = User::find($chatId)->username;
@@ -68,11 +53,7 @@ class ApiMessageController extends ApiController {
 			} else {
 				$data[$key]['send'] = false;
 			}
-			// if ($data->sent_id == ) {
-			// 	# code...
-			// }
 		}
-		// dd($test);
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 	}
 

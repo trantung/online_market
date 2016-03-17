@@ -27,7 +27,7 @@ class CommonUpload {
 					$image = Image::make(sprintf(''.$pathUpload.'/%s', $filename[$key]))
 						->resize(PRODUCT_SLIDE_WIDTH, PRODUCT_SLIDE_HEIGHT)->save();
 				}
-				$data[$key] = ['image_url' => url($path . '/' . $input['user_id'] .'/'. $filename[$key])];
+				$data[$key] = ['image_url' =>  $filename[$key]];
 
 			}
 			return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);

@@ -97,6 +97,8 @@ Route::group(['prefix' => 'api'], function () {
 	Route::post('/message', 'ApiMessageController@index');
 	//send message in the user interface
 	Route::post('/message/{id}/user', 'ApiMessageController@sendUser');
+	//delete convertion with chat_id
+	Route::post('/message/{chat_id}/user/delete', 'ApiMessageController@deleteUserMessage');
 
 	Route::post('/message/{message_id}/show', 'ApiMessageController@show');
 	Route::post('/message/{message_id}/delete', 'ApiMessageController@destroy');

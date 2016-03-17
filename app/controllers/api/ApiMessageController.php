@@ -105,5 +105,12 @@ class ApiMessageController extends ApiController {
 		ApiMessage::find($id)->update($inputMsg);
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId);
 	}
-
+	public function deleteUserMessage($chatId)
+	{
+		$input = Input::all();
+		$sessionId = Common::checkSessionLogin($input);
+		$data = Common::queryCommonMessage($input, $chatId);
+		$data = $data->delete();
+		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId);
+	}
 }

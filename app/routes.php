@@ -93,7 +93,7 @@ Route::group(['prefix' => 'api'], function () {
 	Route::post('/forgot_password', 'ApiForgotPasswordController@index');
 
 	//list message
-	Route::post('/message/history/{chat_id}', 'ApiMessageController@index');
+	Route::post('/message/history/{chat_id}', 'ApiMessageController@history');
 	Route::post('/message', 'ApiMessageController@index');
 	Route::post('/message/{message_id}/show', 'ApiMessageController@show');
 	Route::post('/message/{message_id}/delete', 'ApiMessageController@destroy');

@@ -34,11 +34,42 @@ class ApiMessageController extends ApiController {
 				$data[] = array(
 						'id' => $msg->id,
 						'chat_id' => $value,
+						'chat_name' => User::find($value)->username,
 						'message' => $msg->message,
+						'status' => $msg->status,
 						'time' => date('Y-m-d', strtotime($msg->created_at)),
 					);
 			}
 		}
+		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
+	}
+
+	public function history($chatId)
+	{
+		$input = Input::all();
+		$sessionId = Common::checkSessionLogin($input);
+		$data =  ApiMessage::where(function($query) use ($input, $chatId) {
+				$query->where('sent_id', $input['user_id'])
+					  ->where('receiver_id', $chatId);
+			})
+			->orWhere(function($query) use ($input, $chatId) {
+	            $query->where('receiver_id', $input['user_id'])
+					 ->where('sent_id', $chatId);
+	        })
+	        ->orderBy('created_at', 'desc')
+			->get();
+		foreach ($data as $key => $value) {
+			$test[$key] = $value;
+			if ($value->sent_id == $input['user_id']) {
+				$test[$key]['send'] = true;
+			} else {
+				$test[$key]['send'] = false;
+			}
+			// if ($data->sent_id == ) {
+			// 	# code...
+			// }
+		}
+		// dd($test);
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 	}
 

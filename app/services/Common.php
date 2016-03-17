@@ -99,4 +99,13 @@ class Common {
         });
         return $data;
 	}
+	public static function removeDefaultMessage($data)
+	{
+		unset($data['sent_id']);
+		unset($data['receiver_id']);
+		unset($data['deleted_at']);
+		unset($data['updated_at']);
+		unset($data['status']);
+		return $data;
+	}
 }

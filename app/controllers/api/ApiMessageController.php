@@ -30,7 +30,7 @@ class ApiMessageController extends ApiController {
 						'chat_name' => User::find($value)->username,
 						'message' => $msg->message,
 						'status' => $msg->status,
-						'time' => date('Y-m-d', strtotime($msg->created_at)),
+						'created_at' => date('Y-m-d', strtotime($msg->created_at)),
 					);
 			}
 		}
@@ -45,7 +45,7 @@ class ApiMessageController extends ApiController {
 	    $data->update(['status' => ACTIVE]);
 	    $data = $data->orderBy('created_at', 'desc')->get();
 		foreach ($data as $key => $value) {
-			$data[$key] = $value;
+			$data[$key] = Common::removeDefaultMessage($data[$key]);
 			$data[$key]['chat_name'] = User::find($chatId)->username;
 			$data[$key]['chat_avatar'] = 'chua co, dm hoi nhieu';
 			if ($value->sent_id == $input['user_id']) {

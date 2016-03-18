@@ -125,6 +125,7 @@ class Common {
 				'status' => INACTIVE
 			];
 		}
-		ApiMessage::create($inputMsg);
+		$messageId = ApiMessage::create($inputMsg)->id;
+		return $messageId;
 	}
 }

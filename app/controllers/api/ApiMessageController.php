@@ -83,16 +83,18 @@ class ApiMessageController extends ApiController {
 	{
 		$input = Input::all();
 		$sessionId = Common::checkSessionLogin($input);
-		Common::createNewMessage($input, $id, 'Product');
-		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId);
+		$messageId = Common::createNewMessage($input, $id, 'Product');
+		$messageId = Common::createNewMessage($input, $id);
+		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 	}
 
 	public function sendUser($id)
 	{
 		$input = Input::all();
 		$sessionId = Common::checkSessionLogin($input);
-		Common::createNewMessage($input, $id);
-		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId);
+		$messageId = Common::createNewMessage($input, $id);
+		$data = ['message_id' => $messageId];
+		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 	}
 
 	public function active($id)

@@ -87,5 +87,44 @@ class Common {
 		}
 		return $sessionId;
 	}
-
+	public static function queryCommonMessage($input, $value)
+	{
+		$data = ApiMessage::where(function($query) use ($input, $value) {
+			$query->where('sent_id', $input['user_id'])
+				  ->where('receiver_id', $value);
+		})
+		->orWhere(function($query) use ($input, $value) {
+            $query->where('receiver_id', $input['user_id'])
+				 ->where('sent_id', $value);
+        });
+        return $data;
+	}
+	public static function removeDefaultMessage($data)
+	{
+		unset($data['sent_id']);
+		unset($data['receiver_id']);
+		unset($data['deleted_at']);
+		unset($data['updated_at']);
+		unset($data['status']);
+		return $data;
+	}
+	public static function createNewMessage($input, $id, $table = null)
+	{
+		if ($table) {
+			$inputMsg = [
+				'sent_id' => $input['user_id'],
+				'receiver_id' => $table::find($id)->user_id,
+				'message' => $input['message'],
+				'status' => INACTIVE
+			];
+		}else {
+			$inputMsg = [
+				'sent_id' => $input['user_id'],
+				'receiver_id' => Product::find($id)->user_id,
+				'message' => $input['message'],
+				'status' => INACTIVE
+			];
+		}
+		ApiMessage::create($inputMsg);
+	}
 }

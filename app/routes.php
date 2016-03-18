@@ -93,12 +93,17 @@ Route::group(['prefix' => 'api'], function () {
 	Route::post('/forgot_password', 'ApiForgotPasswordController@index');
 
 	//list message
-	Route::post('/message/history/{chat_id}', 'ApiMessageController@index');
+	Route::post('/message/history/{chat_id}', 'ApiMessageController@history');
 	Route::post('/message', 'ApiMessageController@index');
+	//send message in the user interface
+	Route::post('/message/{id}/user', 'ApiMessageController@sendUser');
+	//delete convertion with chat_id
+	Route::post('/message/{chat_id}/user/delete', 'ApiMessageController@deleteUserMessage');
+
 	Route::post('/message/{message_id}/show', 'ApiMessageController@show');
 	Route::post('/message/{message_id}/delete', 'ApiMessageController@destroy');
-	//send chat offline
-	Route::post('/message/{id}/send', 'ApiMessageController@send');
+	//send chat offline in the product
+	Route::post('/message/{id}/send', 'ApiMessageController@sendProduct');
 	//active status message
 	Route::post('/message/{id}/active', 'ApiMessageController@active');
 

@@ -20,23 +20,38 @@ class ApiMessageController extends ApiController {
 		$total = array_diff($data_recived, $data_sent);
 		$result = array_merge($total, $data_sent);
 		foreach($result as $key => $value) {
-			$msg =  ApiMessage::where(function($query) use ($input, $value) {
-					$query->where('sent_id', $input['user_id'])
-						  ->where('receiver_id', $value);
-				})
-				->orWhere(function($query) use ($input, $value) {
-	                $query->where('receiver_id', $input['user_id'])
-						 ->where('sent_id', $value);
-	            })
-	            ->orderBy('created_at', 'desc')
-				->first();
+			$msg =  Common::queryCommonMessage($input, $value);
+			$msg = $msg->orderBy('created_at', 'desc')->first();
 			if($msg) {
 				$data[] = array(
 						'id' => $msg->id,
+						'chat_avatar' => 'chua co, dm hoi nhieu',
 						'chat_id' => $value,
+						'chat_name' => User::find($value)->username,
 						'message' => $msg->message,
-						'time' => date('Y-m-d', strtotime($msg->created_at)),
+						'status' => $msg->status,
+						'created_at' => date('Y-m-d', strtotime($msg->created_at)),
 					);
+			}
+		}
+		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
+	}
+
+	public function history($chatId)
+	{
+		$input = Input::all();
+		$sessionId = Common::checkSessionLogin($input);
+		$data = Common::queryCommonMessage($input, $chatId);
+	    $data->update(['status' => ACTIVE]);
+	    $data = $data->orderBy('created_at', 'desc')->get();
+		foreach ($data as $key => $value) {
+			$data[$key] = Common::removeDefaultMessage($data[$key]);
+			$data[$key]['chat_name'] = User::find($chatId)->username;
+			$data[$key]['chat_avatar'] = 'chua co, dm hoi nhieu';
+			if ($value->sent_id == $input['user_id']) {
+				$data[$key]['send'] = true;
+			} else {
+				$data[$key]['send'] = false;
 			}
 		}
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
@@ -64,17 +79,19 @@ class ApiMessageController extends ApiController {
 	}
 
 	//param productId
-	public function send($id)
+	public function sendProduct($id)
 	{
 		$input = Input::all();
 		$sessionId = Common::checkSessionLogin($input);
-		$inputMsg = [
-				'sent_id' => $input['user_id'],
-				'receiver_id' => Product::find($id)->user_id,
-				'message' => $input['message'],
-				'status' => INACTIVE
-			];
-		ApiMessage::create($inputMsg);
+		Common::createNewMessage($input, $id, 'Product');
+		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId);
+	}
+
+	public function sendUser($id)
+	{
+		$input = Input::all();
+		$sessionId = Common::checkSessionLogin($input);
+		Common::createNewMessage($input, $id);
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId);
 	}
 
@@ -88,5 +105,12 @@ class ApiMessageController extends ApiController {
 		ApiMessage::find($id)->update($inputMsg);
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId);
 	}
-
+	public function deleteUserMessage($chatId)
+	{
+		$input = Input::all();
+		$sessionId = Common::checkSessionLogin($input);
+		$data = Common::queryCommonMessage($input, $chatId);
+		$data = $data->delete();
+		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId);
+	}
 }

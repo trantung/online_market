@@ -96,7 +96,7 @@ class Common {
 		->orWhere(function($query) use ($input, $value) {
             $query->where('receiver_id', $input['user_id'])
 				 ->where('sent_id', $value);
-        });
+        })->whereNull('deleted_at');
         return $data;
 	}
 	public static function removeDefaultMessage($data)

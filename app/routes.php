@@ -96,12 +96,12 @@ Route::group(['prefix' => 'api'], function () {
 	Route::post('/message/history/{chat_id}', 'ApiMessageController@history');
 	Route::post('/message', 'ApiMessageController@index');
 	//send message in the user interface
-	Route::post('/message/{id}/user', 'ApiMessageController@sendUser');
+	Route::post('/message/user/{chat_id}', 'ApiMessageController@sendUser');
 	//delete convertion with chat_id
-	Route::post('/message/{chat_id}/user/delete', 'ApiMessageController@deleteUserMessage');
+	Route::post('/message/user/delete/{chat_id}', 'ApiMessageController@deleteUserMessage');
 
-	Route::post('/message/{message_id}/show', 'ApiMessageController@show');
-	Route::post('/message/{message_id}/delete', 'ApiMessageController@destroy');
+	Route::post('/message/show/{message_id}', 'ApiMessageController@show');
+	Route::post('/message/delete/{message_id}', 'ApiMessageController@destroy');
 	//send chat offline in the product
 	Route::post('/message/{id}/send', 'ApiMessageController@sendProduct');
 	//active status message

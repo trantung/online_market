@@ -43,7 +43,7 @@ class ApiMessageController extends ApiController {
 		$sessionId = Common::checkSessionLogin($input);
 		$data = Common::queryCommonMessage($input, $chatId);
 	    $data->update(['status' => ACTIVE]);
-	    $data = $data->orderBy('created_at', 'desc')->get();
+	    $data = $data->orderBy('created_at', 'asc')->get();
 		foreach ($data as $key => $value) {
 			$data[$key]['chat_name'] = User::find($chatId)->username;
 			$data[$key]['chat_avatar'] = 'chua co, dm hoi nhieu';
@@ -54,8 +54,6 @@ class ApiMessageController extends ApiController {
 			}
 			$data[$key] = Common::removeDefaultMessage($data[$key]);
 		}
-		// $test = ApiMessage::all();
-		// dd($test->toArray());
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 	}
 

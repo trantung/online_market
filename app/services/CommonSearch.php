@@ -109,4 +109,10 @@ class CommonSearch {
 		//
 	}
 
+	public static function searchDistance($lat, $long, $distance)
+	{
+		$sql = "SELECT id, ( 3959 * acos( cos( radians(".$lat.") ) * cos( radians( lat ) ) * cos( radians( long ) - radians(-".$long.") ) + sin( radians(".$lat.") ) * sin( radians( lat ) ) ) ) AS distance FROM markers HAVING distance < ".$distance." ORDER BY distance LIMIT 0 , 20;";
+		return $sql;
+	}
+
 }

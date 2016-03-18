@@ -52,7 +52,7 @@ class ApiMessageController extends ApiController {
 			} else {
 				$data[$key]['send'] = false;
 			}
-			// $data[$key] = Common::removeDefaultMessage($data[$key]);
+			$data[$key] = Common::removeDefaultMessage($data[$key]);
 		}
 		// $test = ApiMessage::all();
 		// dd($test->toArray());

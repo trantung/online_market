@@ -17,6 +17,10 @@ class ApiFavoriteController extends ApiController {
 													'type_favorite' => TYPE_FAVORITE_LIKE
 												]);
 		$data = User::whereIn('id', $favorites)->select(listFieldUser())->get();
+		foreach($data as $value) {
+            $value->avatar = url(USER_AVATAR . '/' . $value->id . '/' . User::find($value->id)->avatar);
+        }
+		// $data->avatar = url(USER_AVATAR . '/' . $value . '/' . User::find($value)->avatar);
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 	}
 

@@ -25,7 +25,7 @@ class ApiMessageController extends ApiController {
 			if($msg) {
 				$data[] = array(
 						'id' => $msg->id,
-						'chat_avatar' => 'chua co, dm hoi nhieu',
+						'chat_avatar' => url(USER_AVATAR . '/' . $value . '/' . User::find($value)->avatar),
 						'chat_id' => $value,
 						'chat_name' => User::find($value)->username,
 						'message' => $msg->message,
@@ -78,16 +78,6 @@ class ApiMessageController extends ApiController {
 		return Common::returnData(200, DELETE_SUCCESS, $input['user_id'], $sessionId);
 	}
 
-	//param productId
-	public function sendProduct($id)
-	{
-		$input = Input::all();
-		$sessionId = Common::checkSessionLogin($input);
-		$messageId = Common::createNewMessage($input, $id, 'Product');
-		$messageId = Common::createNewMessage($input, $id);
-		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
-	}
-
 	public function sendUser($id)
 	{
 		$input = Input::all();
@@ -97,16 +87,6 @@ class ApiMessageController extends ApiController {
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 	}
 
-	public function active($id)
-	{
-		$input = Input::all();
-		$sessionId = Common::checkSessionLogin($input);
-		$inputMsg = [
-				'status' => ACTIVE
-			];
-		ApiMessage::find($id)->update($inputMsg);
-		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId);
-	}
 	public function deleteUserMessage($chatId)
 	{
 		$input = Input::all();

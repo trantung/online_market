@@ -44,6 +44,9 @@ class CommonProduct {
 			//lat long
 
 		})->select(listFieldProduct())->orderBy('position', 'asc')->get();
+		foreach ($result as $key => $value) {
+			$result->avatar = url(PRODUCT_UPLOAD . '/' . $value->id . '/' . Product::find($value->id)->avatar);
+		}
 		return $result;
 	}
 

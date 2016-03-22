@@ -19,8 +19,8 @@ define('TYPE2', 'Mới');
 define('TYPEVALUE1', 1);
 define('TYPEVALUE2', 2);
 //define status product
-define('PRODUCT_ACTIVE', 'Đã duyệt');
-define('PRODUCT_INACTIVE', 'Chưa duyệt');
+define('PRODUCT_ACTIVE', 'Đã đăng');
+define('PRODUCT_INACTIVE', 'Chưa đăng');
 //lengh random string
 define('RANDOMSTRING', 16);
 //define label setting menu

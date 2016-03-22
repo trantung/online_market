@@ -30,6 +30,7 @@ class ApiProductController extends ApiController {
 					'long' => $product->long,
 					'position' => $product->position,
 					'status' => $product->status,
+					'status_name' => getProductStatus($product->status),
 					'start_time' => date('d-m-Y H:i', strtotime($product->start_time)),
 					'user_id' => $product->user_id,
 					'user_name' => User::find($product->user_id)->username,

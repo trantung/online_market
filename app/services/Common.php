@@ -96,7 +96,7 @@ class Common {
 		->orWhere(function($query) use ($input, $value) {
             $query->where('receiver_id', $input['user_id'])
 				 ->where('sent_id', $value);
-        });
+        })->whereNull('deleted_at');
         return $data;
 	}
 	public static function removeDefaultMessage($data)
@@ -125,6 +125,7 @@ class Common {
 				'status' => INACTIVE
 			];
 		}
-		ApiMessage::create($inputMsg);
+		$messageId = ApiMessage::create($inputMsg)->id;
+		return $messageId;
 	}
 }

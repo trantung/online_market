@@ -7,9 +7,36 @@ class ApiProductController extends ApiController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index($id)
 	{
-		//
+		$input = Input::all();
+		$product = Product::find($id);
+		if(isset($product)) {
+			$data = array(
+				'id' => $product->id,
+				'name' => $product->name,
+				'description' => $product->description,
+				'avatar' => url(PRODUCT_UPLOAD . '/' . $product->user_id . '/' . $product->avatar),
+				'category_id' => $product->category_id,
+				'category_name' => Category::find($product->category_id)->name,
+				'type_id' => $product->type_id,
+				'type_name' => getProductType($product->type_id),
+				'price' => getFullPriceInVnd($product->price) . ' đ',
+				'city_id' => $product->city_id,
+				'city_name' => City::find($product->city_id)->name,
+				'lat' => $product->lat,
+				'long' => $product->long,
+				'position' => $product->position,
+				'status' => $product->status,
+				'start_time' => date('d-m-Y H:i', strtotime($product->start_time)),
+				'user_id' => $product->user_id,
+				'user_name' => User::find($product->user_id)->username,
+
+			);
+		} else {
+			$data = null;
+		}
+		return Common::returnData(200, SUCCESS, $input['user_id'], $input['session_id'], $data);
 	}
 
 	public function saved($id)

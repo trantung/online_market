@@ -45,7 +45,7 @@ class CommonProduct {
 
 		})->select(listFieldProduct())->orderBy('position', 'asc')->get();
 		foreach ($result as $key => $value) {
-			$value->avatar = url(PRODUCT_UPLOAD . '/' . $value->id . '/' . Product::find($value->id)->avatar);
+			$value->avatar = url(PRODUCT_UPLOAD . '/' . $value->user_id . '/' . Product::find($value->id)->avatar);
 		}
 		return $result;
 	}
@@ -84,6 +84,17 @@ class CommonProduct {
 		$input = Input::all();
 		$data = CommonProduct::getProductDeleted($input);
 		return Common::returnData(200, SUCCESS, $input['user_id'], $input['session_id'], $data);
+	}
+
+	public static function getPriceId($price)
+	{
+		$price = Price::where('min', '<=', $price)
+					->where('max', '>', $price)
+					->first();
+		if(isset($price)) {
+			return $price->id;
+		}
+		return 1;
 	}
 
 }

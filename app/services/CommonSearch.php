@@ -83,7 +83,7 @@ class CommonSearch {
 	public static function priceFormArray()
 	{
 		$obj = Price::all();
-		$array[''] = 'Không chọn';
+		$array[''] = '- Không chọn';
 		if(count($obj) > 0) {
 			foreach($obj as $value) {
 				$array[$value->id] = priceArrangeString($value->min, $value->max);
@@ -95,7 +95,7 @@ class CommonSearch {
 	public static function categoryFormArray()
 	{
 		$obj = Category::all();
-		$array[''] = 'Tất cả danh mục';
+		$array[''] = '- Danh mục';
 		if(count($obj) > 0) {
 			foreach($obj as $value) {
 				$array[$value->id] = $value->name;

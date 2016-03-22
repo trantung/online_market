@@ -60,7 +60,7 @@ function getProductType($id) {
 function selectProductType()
 {
 	return array(
-		'' => '-- Lựa chọn',
+		'' => '-- Loại sản phẩm',
 		TYPEVALUE1 => TYPE1,
 		TYPEVALUE2 => TYPE2,
 	);
@@ -170,6 +170,16 @@ function getTime($timeId)
 			break;
 	}
 	return $rs;
+}
+
+function getFullPriceInVnd($number)
+{
+    if ($number > 0)
+        $text = number_format($number, 0, ",", ".");
+    else
+        $text = 0;
+
+    return $text;
 }
 
 /**

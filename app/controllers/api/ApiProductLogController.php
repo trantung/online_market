@@ -30,11 +30,14 @@ class ApiProductLogController extends ApiController {
 	{
 		$input = Input::all();
 		$sessionId = Common::checkSessionLogin($input);
-		Favorite::where('model_name', 'Product')
+		$favorite = Favorite::where('model_name', 'Product')
 				->where('model_id', $id)
 				->where('follow_id', $input['user_id'])
 				->where('type_favorite', TYPE_FAVORITE_SAVE)
-				->delete();
+				->first();
+		if(isset($favorite)) {
+			$favorite->delete();
+		}
 		return Common::returnData(200, DELETE_SUCCESS, $input['user_id'], $sessionId);
 	}
 

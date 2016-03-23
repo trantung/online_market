@@ -6,9 +6,7 @@
 
 @section('content')
 @include('admin.user.search')
-<!-- inclue Search form 
 
--->
 <div class="row">
 	<div class="col-xs-12">
 	  <div class="box">
@@ -22,10 +20,8 @@
 			  <th>ID</th>
 			  <th>Tài khoản</th>
 			  <th>Loại tài khoản</th>
-			  <th>email</th>
+			  <th>Email</th>
 			  <th>Tên</th>
-			  <th>Ip</th>
-			  <th>Device</th>
 			  <th>Đăng nhập cuối</th>
 			  <th>Trạng thái</th>
 			  <th>Action</th>
@@ -33,24 +29,22 @@
 			@foreach($inputUser as $value)
 			<tr>
 			  <td>{{ $value->id }}</td>
-			  <td>{{ UserManager::getUsername($value->id)['user_name'] }}</td>
-			  <td>{{ UserManager::getUsername($value->id)['type_user'] }}</td>
+			  <td>{{ $value->username }}</td>
+			  <td>{{ CommonUser::getUsername($value->id)['type_user'] }}</td>
 			  <td>{{ $value->email }}</td>
 			  <td>{{ $value->fullname }}</td>
-			  <td>{{ $value->ip }}</td>
-			  <td>{{ getNameDevice($value->device) }}</td>
 			  <td>{{ $value->updated_at }}</td>
-			  <td>{{ UserManager::getStatus($value->status) }}</td>
+			  <td>{{ CommonUser::getStatus($value->status) }}</td>
 			  <td>
 			    @if(Admin::isAdmin() || Admin::isEditor())
 				  	@if($value->status == ACTIVE )
-					<a href="{{action('UserController@edit', $value->id) }}" class="btn btn-danger">Hủy</a>
+					<a href="{{action('UserController@edit', $value->id) }}" class="btn btn-danger">Hủy kích hoạt</a>
 					@else
 					<a href="{{action('UserController@edit', $value->id) }}" class="btn btn-primary">Kích hoạt</a>
 					@endif
-					@if(UserManager::getUsername($value->id)['type_user'] == TYPESYSTEM)
-						<a href="{{action('UserController@changePassword', $value->id) }}" class="btn btn-primary">Đổi mật khẩu</a>
-					@endif
+					<!-- @if(CommonUser::getUsername($value->id)['type_user'] == TYPESYSTEM) -->
+						<!-- <a href="{{-- action('UserController@changePassword', $value->id) --}}" class="btn btn-primary">Đổi mật khẩu</a> -->
+					<!-- @endif -->
 		<!-- 		{{ Form::open(array('method'=>'DELETE', 'action' => array('UserController@destroy', $value->id), 'style' => 'display: inline-block;')) }}
 				<button class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</button>
 				{{ Form::close() }} -->

@@ -28,6 +28,10 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/product/check/{id}', 'ProductController@check');
 	Route::resource('/product', 'ProductController');
 
+	Route::get('/user/chanpassword/{id}', array('uses' =>  'UserController@changePassword', 'as' => 'admin.user.chanpassword'));
+	Route::get('/user/search', array('uses' =>  'UserController@search', 'as' => 'admin.user.search'));
+	Route::resource('/user', 'UserController');
+
 });
 
 Route::group(['prefix' => 'api'], function () {

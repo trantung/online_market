@@ -30,6 +30,7 @@ class RegisterController extends ApiController {
             throw new Prototype\Exceptions\UserRegisterException();
         } else {
         	$input['password'] = Hash::make($input['password']);
+        	$input['status'] = INACTIVE;
 			$userId = User::create($input)->id;
 			$sessionId = Common::getSessionId($input, $userId);
 			return Common::returnData(200, SUCCESS, $userId, $sessionId);

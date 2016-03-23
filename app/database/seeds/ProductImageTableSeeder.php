@@ -6,7 +6,7 @@ class ProductImageTableSeeder extends Seeder {
 	{
 		ProductImage::create([
 			'product_id'=> '1',
-			'image_url'=> 'avatar-11.jpg',
+			'image_url'=> 'avatar-1.jpg',
 		]);
 		ProductImage::create([
 			'product_id'=> '1',

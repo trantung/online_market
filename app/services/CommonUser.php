@@ -31,16 +31,17 @@ class CommonUser {
 			return ACTIVEUSER;
 		return INACTIVEUSER;
 	}
+	
 	public static function getUsername($value)
 	{
 		$resultUserName = User::find($value);
 		if($resultUserName->facebook_id){
 			$input['type_user'] = TYPEFACEBOOK;
-			return  $input;
+			return $input;
 		}
 		if($resultUserName->google_id){
 			$input['type_user'] = TYPEGOOGLE;
-			return  $input;
+			return $input;
 		}
 		$input['type_user'] = TYPESYSTEM;
 		return  $input;

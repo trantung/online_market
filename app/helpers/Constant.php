@@ -70,3 +70,5 @@ define('TIME3', 'Từ tháng trước');
 define('TIMEVALUE1', 1);
 define('TIMEVALUE2', 2);
 define('TIMEVALUE3', 3);
+//default reset password 
+define('DEFAULT_PASSWORD', '123456');

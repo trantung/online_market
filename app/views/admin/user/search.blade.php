@@ -2,7 +2,7 @@
     {{ Form::open(array('action' => 'UserController@search', 'method' => 'GET')) }}
         <div class="input-group" style="width: 150px; display:inline-block;">
             <label>Tài khoản</label>
-            <input type="text" name="user_name" class="form-control" placeholder="Tài khoản" />
+            <input type="text" name="keyword" class="form-control" placeholder="Tài khoản" />
         </div>
         <!-- <div class="input-group" style="width: 150px; display:inline-block;">
             <label>Từ ngày</label>

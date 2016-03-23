@@ -34,21 +34,6 @@ class ProductTableSeeder extends Seeder {
 			'position' => '1',
 			'status' => '1',
 		]);
-		Product::create([
-			'user_id'=> '1',
-			'category_id'=> '1',
-			'type_id' => '2',
-			'price_id' => '1',
-			'price' => '100000',
-			'name' => 'San pham 3',
-			'description' => 'Description san pham 3',
-			'avatar' => 'avatar3.jpg',
-			'city_id' => '1',
-			'lat' => '21.00296184',
-			'long' => '105.85202157',
-			'position' => '1',
-			'status' => '1',
-		]);
 
 	}
 

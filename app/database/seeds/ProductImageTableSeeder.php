@@ -6,23 +6,19 @@ class ProductImageTableSeeder extends Seeder {
 	{
 		ProductImage::create([
 			'product_id'=> '1',
-			'image_url'=> 'avatar1.jpg',
+			'image_url'=> 'avatar-11.jpg',
 		]);
 		ProductImage::create([
 			'product_id'=> '1',
-			'image_url'=> 'avatar1-1.jpg',
+			'image_url'=> 'avatar-2.jpg',
 		]);
 		ProductImage::create([
 			'product_id'=> '1',
-			'image_url'=> 'avatar1-2.jpg',
+			'image_url'=> 'avatar-3.jpg',
 		]);
 		ProductImage::create([
 			'product_id'=> '2',
-			'image_url'=> 'avatar2.jpg',
-		]);
-		ProductImage::create([
-			'product_id'=> '3',
-			'image_url'=> 'avatar3.jpg',
+			'image_url'=> 'avatar-4.jpg',
 		]);
 
 	}

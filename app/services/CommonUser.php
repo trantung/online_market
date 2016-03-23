@@ -4,9 +4,10 @@ class CommonUser {
 	public static function seachUser($input){
 		$data = User::where(function ($query) use ($input)
 		{
-			if($input['username'] != '') {
-				$listGame = $query->where('username', 'like', '%'.$input['username'].'%')
-					->orWhere('username', 'like', '%'.$input['username'].'%');
+			if($input['keyword'] != '') {
+				$listGame = $query->where('username', 'like', '%'.$input['keyword'].'%')
+					->orWhere('fullname', 'like', '%'.$input['keyword'].'%')
+					->orWhere('email', 'like', '%'.$input['keyword'].'%');
 			}
 			// if($input['start_date'] != ''){
 			// 	$query = $query->where('created_at', '>=', $input['start_date']);

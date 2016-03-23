@@ -14,6 +14,10 @@ class ApiProductController extends ApiController {
 		$data = null;
 		if(isset($product)) {
 			if(($input['user_id'] == $product->user_id) || ($product->status == ACTIVE)) {
+				$images = ProductImage::where('product_id', $id)->get();
+				foreach ($images as $key => $value) {
+					$value->image_url = url(PRODUCT_UPLOAD . '/' . $product->user_id . '/' . $value->image_url);
+				}
 				$data = array(
 					'id' => $product->id,
 					'name' => $product->name,
@@ -35,7 +39,7 @@ class ApiProductController extends ApiController {
 					'user_id' => $product->user_id,
 					'user_name' => User::find($product->user_id)->username,
 					'user_avatar' => url(USER_AVATAR . '/' . $product->user_id . '/' . User::find($product->user_id)->avatar),
-
+					'image_list' => $images,
 				);
 			}
 		}

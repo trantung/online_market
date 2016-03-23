@@ -22,7 +22,17 @@ class ApiMessageController extends ApiController {
 		foreach($result as $key => $value) {
 			$msg =  Common::queryCommonMessage($input, $value);
 			$msg = $msg->orderBy('created_at', 'desc')->first();
+			$block = BlackList::where('user_id', $input['user_id'])
+				->where('black_id', $value)
+				->first();
+
 			if($msg) {
+				if ($block) {
+					$blockUser = true;
+				}
+				else {
+					$blockUser = false;
+				}
 				$data[] = array(
 						'id' => $msg->id,
 						'chat_avatar' => url(USER_AVATAR . '/' . $value . '/' . User::find($value)->avatar),
@@ -31,6 +41,7 @@ class ApiMessageController extends ApiController {
 						'message' => $msg->message,
 						'status' => $msg->status,
 						'created_at' => date('Y-m-d', strtotime($msg->created_at)),
+						'block' => $blockUser,
 					);
 			}
 		}

@@ -13,6 +13,9 @@ define('DISABLED', 2);
 //status user
 define('ACTIVEUSER', 'Kích hoạt');
 define('INACTIVEUSER', 'Chưa kích hoạt');
+define('TYPESYSTEM', 'Hệ thống');
+define('TYPEFACEBOOK', 'Facebook');
+define('TYPEGOOGLE', 'Google');
 //define type product
 define('TYPE1', 'Cũ');
 define('TYPE2', 'Mới');

@@ -44,7 +44,7 @@
 				  <td>{{ getProductStatus($value->status) }}</td>
 				  <td>
 				  	@if($value->status == ACTIVE)
-						<a href="{{ action('ProductController@check', $value->id) }}" class="btn btn-primary">Bỏ duyệt</a>
+						<a href="{{ action('ProductController@check', $value->id) }}" class="btn btn-danger">Bỏ duyệt</a>
 					@else
 						<a href="{{ action('ProductController@check', $value->id) }}" class="btn btn-primary">Duyệt</a>
 					@endif

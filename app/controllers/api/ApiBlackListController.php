@@ -13,6 +13,9 @@ class ApiBlackListController extends ApiController {
 		$sessionId = Common::checkSessionLogin($input);
 		$blacklist = BlackList::where('user_id', $input['user_id'])->lists('black_id');
 		$data = User::whereIn('id', $blacklist)->select(['avatar', 'username', 'id'])->get();
+		foreach ($data as $key => $value) {
+			$data->avatar = url(USER_AVATAR . '/' . $input['user_id'] . '/' . $data->avatar);
+		}
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 	}
 

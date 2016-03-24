@@ -41,5 +41,14 @@ class ApiFavoriteController extends ApiController {
 				->delete();
 		return Common::returnData(200, DELETE_SUCCESS, $input['user_id'], $sessionId);
 	}
+	public function detailFavorite($userFavoriteId)
+	{
+		$sessionId = Common::checkSessionLogin($input);
+		$listProducts = Product::where('user_id', $userFavoriteId)->get();
+		foreach ($listProducts as $key => $value) {
+			$value->avatar = url(PRODUCT_UPLOAD . '/' . $value->user_id . '/' . Product::find($value->id)->avatar);
+		}
+		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $listProducts);
+	}
 
 }

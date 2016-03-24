@@ -36,7 +36,23 @@ class ProductImageTableSeeder extends Seeder {
 			'product_id'=> '6',
 			'image_url'=> '51.jpg',
 		]);
-		
+		ProductImage::create([
+			'product_id'=> '7',
+			'image_url'=> '61.jpg',
+		]);
+		ProductImage::create([
+			'product_id'=> '8',
+			'image_url'=> '71.jpg',
+		]);
+		ProductImage::create([
+			'product_id'=> '9',
+			'image_url'=> '81.jpg',
+		]);
+		ProductImage::create([
+			'product_id'=> '10',
+			'image_url'=> '91.jpg',
+		]);
+
 	}
 
 }

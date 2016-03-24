@@ -24,6 +24,11 @@ class ApiPostController extends ApiController {
 	{
 		$input = Input::all();
 		$sessionId = Common::checkSessionLogin($input);
+		//check user active
+		$checkUser = User::find($input['user_id'])->status;
+		if(isset($checkUser) && $checkUser == INACTIVE) {
+			throw new Prototype\Exceptions\UserStatusErrorException();
+		}
 		// create product
 		$inputSubmit = [
 				'name' => $input['name'],

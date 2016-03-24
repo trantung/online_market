@@ -20,8 +20,11 @@ class DatabaseSeeder extends Seeder {
 		$this->call('ProductImageTableSeeder');
 		$this->call('FavoriteTableSeeder');
 		$this->call('ApiMessageTableSeeder');
-		$this->call('BlackListTableSeeder');
 		$this->call('TextTableSeeder');
+		$this->call('SearchTableSeeder');
+		$this->call('FeedbackTableSeeder');
+		$this->call('DeviceTableSeeder');
+		$this->call('BlackListTableSeeder');
 
 	}
 

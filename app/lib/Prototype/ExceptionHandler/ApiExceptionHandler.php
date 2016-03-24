@@ -39,4 +39,8 @@ class ApiExceptionHandler {
         return $this->makeJsonResponse(407, "Email is wrong");
     }
 
+    public function handleUserStatusErrorException(){
+        return $this->makeJsonResponse(408, "Account has not been activated");
+    }
+
 }

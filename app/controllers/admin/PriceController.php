@@ -32,8 +32,8 @@ class PriceController extends AdminController {
 	public function store()
 	{
 		$rules = array(
-			'min' => 'required',
-            'max' => 'required',
+			'min' => 'required|integer|min:0',
+            'max' => 'integer|min:0',
 		);
 		$input = Input::except('_token');
 		$validator = Validator::make($input,$rules);
@@ -41,6 +41,9 @@ class PriceController extends AdminController {
 			return Redirect::action('PriceController@create')
 	            ->withErrors($validator);
         } else {
+        	if($input['max'] == '') {
+        		$input['max'] = NULL;
+        	}
         	$id = Price::create($input)->id;
     		return Redirect::action('PriceController@index');
         }
@@ -81,8 +84,8 @@ class PriceController extends AdminController {
 	public function update($id)
 	{
 		$rules = array(
-			'min' => 'required',
-            'max' => 'required',
+			'min' => 'required|integer|min:0',
+            'max' => 'integer|min:0',
 		);
         $input = Input::except('_token');
 		$validator = Validator::make($input,$rules);
@@ -90,6 +93,9 @@ class PriceController extends AdminController {
 			return Redirect::action('PriceController@edit', $id)
 	            ->withErrors($validator);
         } else {
+        	if($input['max'] == '') {
+        		$input['max'] = NULL;
+        	}
         	CommonNormal::update($id, $input);
     		return Redirect::action('PriceController@index');
         }

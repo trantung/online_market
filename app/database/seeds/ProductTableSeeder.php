@@ -5,8 +5,8 @@ class ProductTableSeeder extends Seeder {
 	public function run()
 	{
 		Product::create([
-			'user_id'=> '1',
-			'category_id'=> '3',
+			'user_id' => '1',
+			'category_id' => '3',
 			'type_id' => '1',
 			'price_id' => '3',
 			'price' => '30000000',
@@ -20,8 +20,8 @@ class ProductTableSeeder extends Seeder {
 			'status' => '1',
 		]);
 		Product::create([
-			'user_id'=> '1',
-			'category_id'=> '5',
+			'user_id' => '1',
+			'category_id' => '5',
 			'type_id' => '1',
 			'price_id' => '2',
 			'price' => '4500000',
@@ -35,8 +35,8 @@ class ProductTableSeeder extends Seeder {
 			'status' => '1',
 		]);
 		Product::create([
-			'user_id'=> '1',
-			'category_id'=> '5',
+			'user_id' => '1',
+			'category_id' => '5',
 			'type_id' => '1',
 			'price_id' => '2',
 			'price' => '7500000',
@@ -47,11 +47,11 @@ class ProductTableSeeder extends Seeder {
 			'lat' => '21.00296184',
 			'long' => '105.85202157',
 			'position' => '1',
-			'status' => '1',
+			'status' => '2',
 		]);
 		Product::create([
-			'user_id'=> '1',
-			'category_id'=> '3',
+			'user_id' => '1',
+			'category_id' => '3',
 			'type_id' => '1',
 			'price_id' => '4',
 			'price' => '800000000',
@@ -65,8 +65,8 @@ class ProductTableSeeder extends Seeder {
 			'status' => '1',
 		]);
 		Product::create([
-			'user_id'=> '2',
-			'category_id'=> '7',
+			'user_id' => '1',
+			'category_id' => '7',
 			'type_id' => '1',
 			'price_id' => '2',
 			'price' => '1200000',
@@ -80,14 +80,74 @@ class ProductTableSeeder extends Seeder {
 			'status' => '1',
 		]);
 		Product::create([
-			'user_id'=> '2',
-			'category_id'=> '8',
+			'user_id' => '1',
+			'category_id' => '8',
 			'type_id' => '1',
 			'price_id' => '1',
 			'price' => '350000',
 			'name' => 'Bếp Gas CanZy CZ-370',
 			'description' => 'Bếp Gas CanZy CZ-370',
 			'avatar' => '51.jpg',
+			'city_id' => '1',
+			'lat' => '21.00296184',
+			'long' => '105.85202157',
+			'position' => '1',
+			'status' => '1',
+		]);
+		Product::create([
+			'user_id' => '1',
+			'category_id' => '6',
+			'type_id' => '1',
+			'price_id' => '1',
+			'price' => '550000',
+			'name' => 'Set váy áo cute nữ',
+			'description' => 'Set váy áo cute nữ',
+			'avatar' => '61.jpg',
+			'city_id' => '1',
+			'lat' => '21.00296184',
+			'long' => '105.85202157',
+			'position' => '1',
+			'status' => '1',
+		]);
+		Product::create([
+			'user_id' => '2',
+			'category_id' => '1',
+			'type_id' => '1',
+			'price_id' => '2',
+			'price' => '1500000',
+			'name' => 'Mật ong rừng',
+			'description' => 'Mật ong rừng',
+			'avatar' => '71.jpg',
+			'city_id' => '1',
+			'lat' => '21.00296184',
+			'long' => '105.85202157',
+			'position' => '1',
+			'status' => '1',
+		]);
+		Product::create([
+			'user_id' => '2',
+			'category_id' => '2',
+			'type_id' => '1',
+			'price_id' => '1',
+			'price' => '300000',
+			'name' => 'Guitar A380 Mặt gỗ',
+			'description' => 'Guitar A380 Mặt gỗ',
+			'avatar' => '81.jpg',
+			'city_id' => '1',
+			'lat' => '21.00296184',
+			'long' => '105.85202157',
+			'position' => '1',
+			'status' => '1',
+		]);
+		Product::create([
+			'user_id' => '3',
+			'category_id' => '4',
+			'type_id' => '1',
+			'price_id' => '4',
+			'price' => '1300000000',
+			'name' => 'Căn hộ 1 phòng ngủ HH1B-Linh Đàm',
+			'description' => 'Căn hộ 1 phòng ngủ HH1B-Linh Đàm',
+			'avatar' => '91.jpg',
 			'city_id' => '1',
 			'lat' => '21.00296184',
 			'long' => '105.85202157',

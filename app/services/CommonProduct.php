@@ -89,10 +89,14 @@ class CommonProduct {
 	public static function getPriceId($price)
 	{
 		$price = Price::where('min', '<=', $price)
-					->where('max', '>', $price)
+					->where('max', '>=', $price)
 					->first();
+		$priceLastMin = Price::whereNull('max')->first();
 		if(isset($price)) {
 			return $price->id;
+		}
+		if($price > $priceLastMin) {
+			return $priceLastMin->id;
 		}
 		return 1;
 	}

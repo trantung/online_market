@@ -75,6 +75,8 @@ Route::group(['prefix' => 'api'], function () {
 	Route::post('/favorite/{user_favorite_id}/detail', 'ApiFavoriteController@detailFavorite');
 	//delete favorite user
 	Route::post('/favorite/{id}/delete', 'ApiFavoriteController@destroy');
+	// favorite action
+	Route::post('/favorite/{id}/action', 'ApiFavoriteController@action');
 
 	//search products
 	Route::get('/search/{id}', 'ApiSearchController@index');

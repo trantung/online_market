@@ -41,6 +41,7 @@ class ApiFavoriteController extends ApiController {
 				->delete();
 		return Common::returnData(200, DELETE_SUCCESS, $input['user_id'], $sessionId);
 	}
+
 	public function detailFavorite($userFavoriteId)
 	{
 		$input = Input::all();
@@ -50,6 +51,33 @@ class ApiFavoriteController extends ApiController {
 			$value->avatar = url(PRODUCT_UPLOAD . '/' . $value->user_id . '/' . Product::find($value->id)->avatar);
 		}
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $listProducts);
+	}
+
+	public function action($id)
+	{
+		$input = Input::all();
+		$sessionId = Common::checkSessionLogin($input);
+		$favorite = Favorite::where('model_name', 'User')
+						->where('model_id', $id)
+						->where('follow_id', $input['user_id'])
+						->where('type_favorite', TYPE_FAVORITE_LIKE)
+						->first();
+		if(!isset($favorite)) {
+			Favorite::create([
+						'model_name' => 'User', 
+						'model_id' => $id, 
+						'follow_id' => $input['user_id'], 
+						'type_favorite' => TYPE_FAVORITE_LIKE
+					]);
+		}
+		// else {
+		// 	Favorite::where('model_name', 'User')
+		// 		->where('model_id', $id)
+		// 		->where('follow_id', $input['user_id'])
+		// 		->where('type_favorite', TYPE_FAVORITE_LIKE)
+		// 		->delete();
+		// }
+		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId);
 	}
 
 }

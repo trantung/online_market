@@ -56,14 +56,14 @@ class UserController extends AdminController {
 	 */
 	public function edit($id)
 	{
-		$statusUser = User::find($id);
-		if($statusUser->status == ACTIVE)
-		{
-			$input['status'] = INACTIVE;
-			CommonNormal::update($id, ['status' => $input['status']]);
-		}else{
-			$input['status'] = ACTIVE;
-			CommonNormal::update($id, ['status' => $input['status']]);
+		$user = User::find($id);
+		if(isset($user)) {
+			if($user->status == ACTIVE)
+			{
+				$user->update(['status' => INACTIVE]);
+			} else {
+				$user->update(['status' => ACTIVE]);
+			}
 		}
 		return Redirect::action('UserController@index') ;
 	}
@@ -85,7 +85,7 @@ class UserController extends AdminController {
 		$input = Input::except('_token');
 		$validator = Validator::make($input,$rules);
 		if($validator->fails()) {
-			return Redirect::action('UserController@changePassword',$id)
+			return Redirect::action('UserController@changepassword', $id)
 	            ->withErrors($validator)
 	            ->withInput(Input::except('password'));
         } else {
@@ -117,7 +117,7 @@ class UserController extends AdminController {
 	}
 
 	//change password
-	public function changePassword($id)
+	public function changepassword($id)
 	{
 		$inputUser = User::find($id);
 		return View::make('admin.user.changepassword')->with(compact('inputUser'));

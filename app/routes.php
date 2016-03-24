@@ -28,13 +28,14 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/product/check/{id}', 'ProductController@check');
 	Route::resource('/product', 'ProductController');
 
-	Route::get('/user/chanpassword/{id}', array('uses' =>  'UserController@changePassword', 'as' => 'admin.user.chanpassword'));
+	Route::get('/user/changepassword/{id}', array('uses' =>  'UserController@changepassword', 'as' => 'admin.user.changepassword'));
 	Route::get('/user/search', array('uses' =>  'UserController@search', 'as' => 'admin.user.search'));
 	Route::resource('/user', 'UserController');
 
 });
 
 Route::group(['prefix' => 'api'], function () {
+
 	//check login, logout -> finish
 	Route::get('/login', 'LoginController@getLogin');
 	Route::post('/login', 'LoginController@postLogin');
@@ -89,15 +90,15 @@ Route::group(['prefix' => 'api'], function () {
 	//verify user->later
 	Route::post('/verify_phone', 'ApiVerifyAccountController@index');
 
+	//reset password user
+	Route::post('/resetpassword', 'ApiPasswordController@resetpassword');
+
 	//list products user->finish
 	Route::post('/product_user/{id}', 'ApiProductController@listProductUser');
 
 	//black list user->finish
 	Route::post('/blacklist', 'ApiBlackListController@index');
 	Route::post('/blacklist/{black_id}/delete', 'ApiBlackListController@destroy');
-
-	//forgot password
-	Route::post('/forgot_password', 'ApiForgotPasswordController@index');
 
 	//list message
 	Route::post('/message/history/{chat_id}', 'ApiMessageController@history');
@@ -135,5 +136,6 @@ Route::group(['prefix' => 'api'], function () {
 	Route::post('/upload_image', 'ApiUploadController@store');
 	//upload images product
 	Route::post('/upload_image/product', 'ApiUploadController@imageProduct');
+
 
 });

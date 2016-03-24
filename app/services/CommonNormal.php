@@ -44,6 +44,9 @@ class CommonNormal
 		if($name == 'product') {
 			return 'Product';
 		}
+		if($name == 'user') {
+			return 'User';
+		}
 
 	}
 }

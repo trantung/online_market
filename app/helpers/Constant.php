@@ -46,6 +46,7 @@ define('PROMO', 'Khuyến mại');
 define('HELP', 'Hướng dẫn');
 define('SHAREAPP', 'Chia sẻ ứng dụng');
 define('CONTACT', 'Liên hệ');
+define('SEETYPE', 'Kiểu xem');
 //define save or favorite
 define('TYPE_FAVORITE_SAVE', 1);
 define('TYPE_FAVORITE_LIKE', 2);
@@ -70,3 +71,5 @@ define('TIME3', 'Từ tháng trước');
 define('TIMEVALUE1', 1);
 define('TIMEVALUE2', 2);
 define('TIMEVALUE3', 3);
+//default reset password 
+define('DEFAULT_PASSWORD', '123456');

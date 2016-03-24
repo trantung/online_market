@@ -16,16 +16,20 @@ class CommonSetting {
 	{
 		$setting = array(
 		    [
-		     'name' => REGISTER,
-		     'link' => url('api/register'),
-		     'method' => 'GET',
-		     'quantity' => null
+		    	'id' => 11,
+				'name' => REGISTER,
+				'link' => url('api/register'),
+				'method' => 'GET',
+				'quantity' => null,
+				'image_url' => null
 		    ],
 		    [
-		     'name' => LOGIN,
-		     'link' => url('api/login'),
-		     'method' => 'GET',
-		     'quantity' => null
+		    	'id' => 12,
+				'name' => LOGIN,
+				'link' => url('api/login'),
+				'method' => 'GET',
+				'quantity' => null,
+				'image_url' => null
 		    ],
 	    );
 		$setting = array_merge($setting, self::getSettingMenu3());
@@ -36,40 +40,52 @@ class CommonSetting {
 	{
 		$setting = array(
 			[
-		     'name' => PRODUCT_STATUS_1,
-		     'link' => url('api/product_status/1'),
-		     'method' => 'POST',
-		     'quantity' => CommonProduct::countProduct(array('user_id'=>$input['user_id'], 'status'=>1))
+				'id' => 1,
+				'name' => PRODUCT_LOG,
+				'link' => url('api/product_log'),
+				'method' => 'POST',
+				'quantity' => CommonFavorite::countFavorite(array('model_name'=>'Product', 'follow_id'=>$input['user_id'])),
+				'image_url' => url('images/icons/44.png')
 		    ],
 		    [
-		     'name' => PRODUCT_STATUS_2,
-		     'link' => url('api/product_status/2'),
-		     'method' => 'POST',
-		     'quantity' => CommonProduct::countProduct(array('user_id'=>$input['user_id'], 'status'=>2))
+		    	'id' => 2,
+				'name' => SEARCH_LOG,
+				'link' => url('api/search_log'),
+				'method' => 'POST',
+				'quantity' => CommonSearch::countSearch(array('user_id'=>$input['user_id'])),
+				'image_url' => url('images/icons/40.png')
+		    ],
+			[
+				'id' => 7,
+				'name' => PRODUCT_STATUS_1,
+				'link' => url('api/product_status/1'),
+				'method' => 'POST',
+				'quantity' => CommonProduct::countProduct(array('user_id'=>$input['user_id'], 'status'=>1)),
+				'image_url' => url('images/icons/47.png')
 		    ],
 		    [
-		     'name' => PRODUCT_STATUS_3,
-		     'link' => url('api/product_status/3'),
-		     'method' => 'POST',
-		     'quantity' => CommonProduct::countProduct(array('user_id'=>$input['user_id'], 'status'=>3))
+		    	'id' => 8,
+				'name' => PRODUCT_STATUS_2,
+				'link' => url('api/product_status/2'),
+				'method' => 'POST',
+				'quantity' => CommonProduct::countProduct(array('user_id'=>$input['user_id'], 'status'=>2)),
+				'image_url' => url('images/icons/46.png')
 		    ],
 		    [
-		     'name' => PRODUCT_STATUS_4,
-		     'link' => url('api/product_hidden'),
-		     'method' => 'POST',
-		     'quantity' => CommonProduct::countProductDeleted(array('user_id'=>$input['user_id']))
+		    	'id' => 9,
+				'name' => PRODUCT_STATUS_3,
+				'link' => url('api/product_status/3'),
+				'method' => 'POST',
+				'quantity' => CommonProduct::countProduct(array('user_id'=>$input['user_id'], 'status'=>3)),
+				'image_url' => url('images/icons/48.png')
 		    ],
 		    [
-		     'name' => PRODUCT_LOG,
-		     'link' => url('api/product_log'),
-		     'method' => 'POST',
-		     'quantity' => CommonFavorite::countFavorite(array('model_name'=>'Product', 'follow_id'=>$input['user_id']))
-		    ],
-		    [
-		     'name' => SEARCH_LOG,
-		     'link' => url('api/search_log'),
-		     'method' => 'POST',
-		     'quantity' => CommonSearch::countSearch(array('user_id'=>$input['user_id']))
+		    	'id' => 10,
+				'name' => PRODUCT_STATUS_4,
+				'link' => url('api/product_hidden'),
+				'method' => 'POST',
+				'quantity' => CommonProduct::countProductDeleted(array('user_id'=>$input['user_id'])),
+				'image_url' => url('images/icons/49.png')
 		    ],
 	    );
 		$setting = array_merge($setting, self::getSettingMenu3());
@@ -78,40 +94,60 @@ class CommonSetting {
 	}
 	public static function getLogoutMenu()
 	{
-		return [['name' => LOGOUT,
-						'link' => url('api/logout'),
-						'method' => 'POST',
-						'quantity' => null
-					]];
+		return [[
+					'id' => 13,
+					'name' => LOGOUT,
+					'link' => url('api/logout'),
+					'method' => 'POST',
+					'quantity' => null,
+					'image_url' => null
+				]];
 	}
 
 	public static function getSettingMenu3()
 	{
 		$setting = array(
 		    [
-		     'name' => PROMO,
-		     'link' => url('api/text/1'),
-		     'method' => 'POST',
-		     'quantity' => null
+		    	'id' => 3,
+				'name' => PROMO,
+				'link' => url('api/text/1'),
+				'method' => 'POST',
+				'quantity' => null,
+				'image_url' => url('images/icons/42.png')
 		    ],
 		    [
-		     'name' => HELP,
-		     'link' => url('api/text/2'),
-		     'method' => 'POST',
-		     'quantity' => null
+		    	'id' => 4,
+				'name' => HELP,
+				'link' => url('api/text/2'),
+				'method' => 'POST',
+				'quantity' => null,
+				'image_url' => url('images/icons/41.png')
 		    ],
 		    [
-		     'name' => SHAREAPP,
-		     'link' => null,
-		     'method' => null,
-		     'quantity' => null
+		    	'id' => 5,
+				'name' => SHAREAPP,
+				'link' => null,
+				'method' => null,
+				'quantity' => null,
+				'image_url' => url('images/icons/45.png')
 		    ],
 		    [
-		     'name' => CONTACT,
-		     'link' => url('api/text/3'),
-		     'method' => 'POST',
-		     'quantity' => null
+		    	'id' => 6,
+				'name' => CONTACT,
+				'link' => url('api/text/3'),
+				'method' => 'POST',
+				'quantity' => null,
+				'image_url' => url('images/icons/43.png')
 		    ],
+		    [
+		    	'id' => 14,
+				'name' => SEETYPE,
+				'link' => null,
+				'method' => null,
+				'quantity' => null,
+				'image_url' => url('images/icons/50.png')
+		    ],
+
 	    );
 	    return $setting;
 	}

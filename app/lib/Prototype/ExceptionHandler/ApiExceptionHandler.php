@@ -35,4 +35,8 @@ class ApiExceptionHandler {
         return $this->makeJsonResponse(406, "Image upload is wrong");
     }
 
+    public function handleEmailErrorException(){
+        return $this->makeJsonResponse(407, "Email is wrong");
+    }
+
 }

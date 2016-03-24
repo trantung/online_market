@@ -43,6 +43,7 @@ class ApiFavoriteController extends ApiController {
 	}
 	public function detailFavorite($userFavoriteId)
 	{
+		$input = Input::all();
 		$sessionId = Common::checkSessionLogin($input);
 		$listProducts = Product::where('user_id', $userFavoriteId)->get();
 		foreach ($listProducts as $key => $value) {

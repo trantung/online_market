@@ -69,8 +69,11 @@ Route::group(['prefix' => 'api'], function () {
 	Route::get('/post_product', 'ApiPostController@index');
 	Route::post('/post_product', 'ApiPostController@post');
 
-	//list favorite user products->finish
+	//list favorite user 
 	Route::post('/favorite', 'ApiFavoriteController@index');
+	//detail favorite user
+	Route::post('/favorite/{user_favorite_id}/detail', 'ApiFavoriteController@detailFavorite');
+	//delete favorite user
 	Route::post('/favorite/{id}/delete', 'ApiFavoriteController@destroy');
 
 	//search products
@@ -100,7 +103,7 @@ Route::group(['prefix' => 'api'], function () {
 	//list message
 	Route::post('/message/history/{chat_id}', 'ApiMessageController@history');
 	Route::post('/message', 'ApiMessageController@index');
-	//send message in the user interface
+	//send message in the user inter@bcc0me
 	Route::post('/message/user/{chat_id}', 'ApiMessageController@sendUser');
 	//delete convertion with chat_id
 	Route::post('/message/user/delete/{chat_id}', 'ApiMessageController@deleteUserMessage');

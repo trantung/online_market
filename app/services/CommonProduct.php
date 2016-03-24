@@ -48,6 +48,7 @@ class CommonProduct {
 				$query = $query->whereIn('id', $input['ids']);
 			}
 		})->select(listFieldProduct())->orderBy('position', 'asc')->get();
+		
 		foreach ($result as $key => $value) {
 			$value->avatar = url(PRODUCT_UPLOAD . '/' . $value->user_id . '/' . Product::find($value->id)->avatar);
 		}
@@ -59,6 +60,9 @@ class CommonProduct {
 		$result = Product::onlyTrashed()
 			->where('user_id', $input['user_id'])
 			->select(listFieldProduct())->orderBy('position', 'asc')->get();
+		foreach ($result as $key => $value) {
+			$value->avatar = url(PRODUCT_UPLOAD . '/' . $value->user_id . '/' . Product::find($value->id)->avatar);
+		}
 		return $result;
 	}
 

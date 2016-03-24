@@ -9,7 +9,7 @@ class CommonProduct {
 
 	public static function getProduct($input = array())
 	{
-		$result = Product::where(function ($query) use ($input){
+		$result = Product::withTrashed()->where(function ($query) use ($input){
 			if (!empty($input['user_id'])) {
 				$query = $query->where('user_id', $input['user_id']);
 			}

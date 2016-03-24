@@ -61,7 +61,7 @@ class CommonProduct {
 			->where('user_id', $input['user_id'])
 			->select(listFieldProduct())->orderBy('position', 'asc')->get();
 		foreach ($result as $key => $value) {
-			$value->avatar = url(PRODUCT_UPLOAD . '/' . $value->user_id . '/' . Product::find($value->id)->avatar);
+			$value->avatar = url(PRODUCT_UPLOAD . '/' . $value->user_id . '/' . $value->avatar);
 		}
 		return $result;
 	}

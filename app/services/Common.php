@@ -163,8 +163,8 @@ class Common {
 
 	public static function getCategoryImageLike($id, $input)
 	{
-		$heart1 = url('images/icon/10.png');
-		$heart2 = url('images/icon/11.png');
+		$heart1 = url('images/icons/10.png');
+		$heart2 = url('images/icons/11.png');
 		$check = CommonFavorite::checkFavoriteLike('Category', $id, TYPE_FAVORITE_CATE, $input['user_id']);
 		if($check) {
 			return $heart2;

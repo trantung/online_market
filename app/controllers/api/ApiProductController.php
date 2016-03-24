@@ -40,6 +40,7 @@ class ApiProductController extends ApiController {
 					'user_name' => User::find($product->user_id)->username,
 					'user_avatar' => url(USER_AVATAR . '/' . $product->user_id . '/' . User::find($product->user_id)->avatar),
 					'image_list' => $images,
+					'black' => Common::checkBlackList($input['user_id'], $product->user_id)
 				);
 			}
 		}

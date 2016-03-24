@@ -128,4 +128,19 @@ class Common {
 		$messageId = ApiMessage::create($inputMsg)->id;
 		return $messageId;
 	}
+
+	public static function checkBlackList($userId, $blackId)
+	{
+		$blacklist = BlackList::where('user_id', $userId)
+						->where('black_id', $blackId)
+						->first();
+		$blacklist2 = BlackList::where('user_id', $blackId)
+						->where('black_id', $userId)
+						->first();
+		if(isset($blacklist) || isset($blacklist2)) {
+			return true;
+		}
+		return false;
+	}
+
 }

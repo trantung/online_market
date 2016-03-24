@@ -20,7 +20,8 @@ class ApiProductController extends ApiController {
 				}
 				$data = array(
 					'id' => $product->id,
-					'name' => $product->name,
+					'name' => User::find($product->id)->phone,
+					'phone' => $product->name,
 					'description' => $product->description,
 					'avatar' => url(PRODUCT_UPLOAD . '/' . $product->user_id . '/' . $product->avatar),
 					'category_id' => $product->category_id,

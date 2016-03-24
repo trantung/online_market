@@ -15,22 +15,22 @@ class CommonSetting {
 	public static function getSettingMenu1($input)
 	{
 		$setting = array(
-		    [
-		    	'id' => 11,
-				'name' => REGISTER,
-				'link' => url('api/register'),
-				'method' => 'GET',
-				'quantity' => null,
-				'image_url' => null
-		    ],
-		    [
-		    	'id' => 12,
-				'name' => LOGIN,
-				'link' => url('api/login'),
-				'method' => 'GET',
-				'quantity' => null,
-				'image_url' => null
-		    ],
+		  //   [
+		  //   	'id' => 11,
+				// 'name' => REGISTER,
+				// 'link' => url('api/register'),
+				// 'method' => 'GET',
+				// 'quantity' => null,
+				// 'image_url' => null
+		  //   ],
+		  //   [
+		  //   	'id' => 12,
+				// 'name' => LOGIN,
+				// 'link' => url('api/login'),
+				// 'method' => 'GET',
+				// 'quantity' => null,
+				// 'image_url' => null
+		  //   ],
 	    );
 		$setting = array_merge($setting, self::getSettingMenu3());
 	    return $setting;
@@ -94,14 +94,16 @@ class CommonSetting {
 	}
 	public static function getLogoutMenu()
 	{
-		return [[
-					'id' => 13,
-					'name' => LOGOUT,
-					'link' => url('api/logout'),
-					'method' => 'POST',
-					'quantity' => null,
-					'image_url' => null
-				]];
+		return [
+					// [
+					// 	'id' => 13,
+					// 	'name' => LOGOUT,
+					// 	'link' => url('api/logout'),
+					// 	'method' => 'POST',
+					// 	'quantity' => null,
+					// 	'image_url' => null
+					// ]
+				];
 	}
 
 	public static function getSettingMenu3()

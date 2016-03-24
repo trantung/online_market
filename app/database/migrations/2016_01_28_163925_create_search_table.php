@@ -19,9 +19,9 @@ class CreateSearchTable extends Migration {
             $table->integer('price_id')->nullable();
             $table->integer('category_id')->nullable();
             $table->integer('type_id')->nullable();
-            $table->integer('start_date')->nullable();
-            $table->integer('lat')->nullable();
-            $table->integer('long')->nullable();
+            $table->integer('time_id')->nullable();
+            $table->string('lat', 256)->nullable();
+            $table->string('long', 256)->nullable();
             $table->timestamps();
         });
 	}

@@ -27,6 +27,7 @@ class CreateProductTable extends Migration {
             $table->string('long', 256)->nullable();
             $table->integer('position')->nullable();
             $table->integer('status')->nullable();
+            $table->string('start_time')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

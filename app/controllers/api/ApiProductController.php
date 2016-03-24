@@ -88,7 +88,7 @@ class ApiProductController extends ApiController {
 		} else {
 			$isPhone = 1;
 		}
-		return CommonProduct::returnProduct(array('user_id'=>$id, 'status'=>1, 'isPhone' => $isPhone));
+		return CommonProduct::returnProduct(array('user_id'=>$id, 'status'=>ACTIVE, 'isPhone' => $isPhone));
 	}
 
 }

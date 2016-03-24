@@ -41,12 +41,12 @@ class CommonProduct {
 			if (!empty($input['end_date'])) {
 				$query = $query->where('start_time', '<=', $input['end_date']);
 			}
+			//lat long
+			
+
 			if (!empty($input['ids'])) {
 				$query = $query->whereIn('id', $input['ids']);
 			}
-
-			//lat long
-
 		})->select(listFieldProduct())->orderBy('position', 'asc')->get();
 		foreach ($result as $key => $value) {
 			$value->avatar = url(PRODUCT_UPLOAD . '/' . $value->user_id . '/' . Product::find($value->id)->avatar);

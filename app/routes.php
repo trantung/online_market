@@ -26,6 +26,7 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::resource('/price', 'PriceController');
 	Route::resource('/category', 'CategoryController');
 	Route::get('/product/check/{id}', 'ProductController@check');
+	Route::get('/product/refuse/{id}', 'ProductController@refuse');
 	Route::resource('/product', 'ProductController');
 
 	Route::get('/user/changepassword/{id}', array('uses' =>  'UserController@changepassword', 'as' => 'admin.user.changepassword'));
@@ -56,6 +57,8 @@ Route::group(['prefix' => 'api'], function () {
 
 	//list products following category->finish
 	Route::post('/category/{id}', 'ApiCategoryController@show');
+	// favorite category
+	Route::post('/category/{id}/action', 'ApiCategoryController@action');
 
 	//detail product
 	Route::post('/product/{id}', 'ApiProductController@index');
@@ -75,7 +78,7 @@ Route::group(['prefix' => 'api'], function () {
 	Route::post('/favorite/{user_favorite_id}/detail', 'ApiFavoriteController@detailFavorite');
 	//delete favorite user
 	Route::post('/favorite/{id}/delete', 'ApiFavoriteController@destroy');
-	// favorite action
+	// favorite user action
 	Route::post('/favorite/{id}/action', 'ApiFavoriteController@action');
 
 	//search products

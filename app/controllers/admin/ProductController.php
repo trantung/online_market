@@ -9,7 +9,8 @@ class ProductController extends AdminController {
 	 */
 	public function index()
 	{
-		$data = Product::orderBy('id', 'desc')->paginate(PAGINATE);
+		$data = Product::whereIn('status', [ACTIVE, INACTIVE])
+					->orderBy('id', 'desc')->paginate(PAGINATE);
 		return View::make('admin.product.index')->with(compact('data'));
 	}
 
@@ -92,6 +93,12 @@ class ProductController extends AdminController {
 			$input = ['status' => ACTIVE];
 		}
 		CommonNormal::update($id, $input);
+		return Redirect::action('ProductController@index');
+	}
+
+	public function refuse($id)
+	{
+		CommonNormal::update($id, ['status' => REFUSE]);
 		return Redirect::action('ProductController@index');
 	}
 

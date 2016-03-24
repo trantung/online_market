@@ -41,7 +41,7 @@ class ApiProfileController extends ApiController {
 
 	public function account($id)
 	{
-		return CommonProduct::returnProduct(array('user_id'=>$id, 'status'=>1));
+		return CommonProduct::returnProduct(array('user_id'=>$id, 'status'=>ACTIVE));
 	}
 
 	public function block($id)

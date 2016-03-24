@@ -143,4 +143,33 @@ class Common {
 		return false;
 	}
 
+	public static function getCategoryWithLike($input)
+	{
+		// $cats = Common::getListArray('Category', ['id', 'name']);
+		$cats = Category::all();
+		if($cats) {
+			foreach($cats as $key => $value) {
+				$data[$key] = [
+					'id' => $value->id,
+					'name' => $value->name,
+					'image_url' => self::getCategoryImageLike($value->id, $input),
+					'like' => CommonFavorite::checkFavoriteLike('Category', $value->id, TYPE_FAVORITE_CATE, $input['user_id'])
+				];				
+			}
+		}
+		$data = array_merge(['0'=>array('id'=>0, 'name'=>'Home')], $data);
+		return $data;
+	}
+
+	public static function getCategoryImageLike($id, $input)
+	{
+		$heart1 = url('images/icon/10.png');
+		$heart2 = url('images/icon/11.png');
+		$check = CommonFavorite::checkFavoriteLike('Category', $id, TYPE_FAVORITE_CATE, $input['user_id']);
+		if($check) {
+			return $heart2;
+		}
+		return $heart1;
+	}
+
 }

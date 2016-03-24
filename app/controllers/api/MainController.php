@@ -9,7 +9,7 @@ class MainController extends ApiController {
 	 */
 	public function index()
 	{
-		return CommonProduct::returnProduct(array('status'=>1));
+		return CommonProduct::returnProduct(array('status'=>ACTIVE));
 	}
 
 }

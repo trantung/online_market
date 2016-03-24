@@ -7,6 +7,7 @@ define('PAGINATE', 20);
 //status
 define('ACTIVE', 1);
 define('INACTIVE', 2);
+define('REFUSE', 3);
 //status
 define('ENABLED', 1);
 define('DISABLED', 2);
@@ -48,8 +49,12 @@ define('SHAREAPP', 'Chia sẻ ứng dụng');
 define('CONTACT', 'Liên hệ');
 define('SEETYPE', 'Kiểu xem');
 //define save or favorite
+// favorite/save product
 define('TYPE_FAVORITE_SAVE', 1);
+// favorite user
 define('TYPE_FAVORITE_LIKE', 2);
+// favorite category
+define('TYPE_FAVORITE_CATE', 3);
 
 //define upload product image origin
 define('PRODUCT_UPLOAD', '/images/products');

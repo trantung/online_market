@@ -19,4 +19,17 @@ class CommonFavorite {
 		return $result;
 	}
 
+	public static function checkFavoriteLike($modelName, $modelId, $type, $followId)
+	{
+		$check = Favorite::where('model_name', $modelName)
+						->where('model_id', $modelId)
+						->where('type_favorite', $type)
+						->where('follow_id', $followId)
+						->first();
+		if(isset($check)) {
+			return true;
+		}
+		return false;
+	}
+
 }

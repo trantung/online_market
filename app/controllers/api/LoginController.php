@@ -22,6 +22,7 @@ class LoginController extends ApiController {
 		if (!$user) {
 			$sessionId = generateRandomString();
 			$userId = User::create([
+					'username' => $input['username'],
 					'facebook_id' => $input['facebook_id'],
 					'google_id' => $input['google_id']
 				])->id;

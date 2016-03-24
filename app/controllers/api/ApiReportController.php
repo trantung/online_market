@@ -18,7 +18,7 @@ class ApiReportController extends ApiController {
 				'message' => $input['message'],
 				'status' => ACTIVE
 			];
-		FeedBack::create($inputFeedback)->id;
+		Feedback::create($inputFeedback)->id;
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId);
 	}
 

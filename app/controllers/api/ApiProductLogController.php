@@ -16,8 +16,7 @@ class ApiProductLogController extends ApiController {
 													'follow_id' => $input['user_id'],
 													'type_favorite' => TYPE_FAVORITE_SAVE
 												]);
-		$data = Product::whereIn('id', $favorites)->select(listFieldProduct())->get();
-		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
+		return CommonProduct::returnProduct(array('ids' => $favorites));
 	}
 
 	/**

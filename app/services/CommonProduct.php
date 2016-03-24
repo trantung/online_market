@@ -41,6 +41,10 @@ class CommonProduct {
 			if (!empty($input['end_date'])) {
 				$query = $query->where('start_time', '<=', $input['end_date']);
 			}
+			if (!empty($input['ids'])) {
+				$query = $query->whereIn('id', $input['ids']);
+			}
+
 			//lat long
 
 		})->select(listFieldProduct())->orderBy('position', 'asc')->get();

@@ -69,8 +69,9 @@ function selectProductType()
 //Product status
 function getProductStatus($id) {
 	$arr = array(
-		ACTIVE => PRODUCT_ACTIVE,
-		INACTIVE => PRODUCT_INACTIVE,
+		ACTIVE => PRODUCT_STATUS_1,
+		INACTIVE => PRODUCT_STATUS_2,
+		REFUSE => PRODUCT_STATUS_3,
 	);
 	return $arr[$id];
 }
@@ -79,8 +80,9 @@ function selectProductStatus()
 {
 	return array(
 		'' => '-- Lựa chọn',
-		ACTIVE => PRODUCT_ACTIVE,
-		INACTIVE => PRODUCT_INACTIVE,
+		ACTIVE => PRODUCT_STATUS_1,
+		INACTIVE => PRODUCT_STATUS_2,
+		REFUSE => PRODUCT_STATUS_3,
 	);
 }
 

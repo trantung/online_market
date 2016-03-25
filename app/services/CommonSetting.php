@@ -109,14 +109,14 @@ class CommonSetting {
 	public static function getSettingMenu3()
 	{
 		$setting = array(
-		    [
-		    	'id' => 3,
-				'name' => PROMO,
-				'link' => url('api/text/1'),
-				'method' => 'POST',
-				'quantity' => null,
-				'image_url' => url('images/icons/42.png')
-		    ],
+		  //   [
+		  //   	'id' => 3,
+				// 'name' => PROMO,
+				// 'link' => url('api/text/1'),
+				// 'method' => 'POST',
+				// 'quantity' => null,
+				// 'image_url' => url('images/icons/42.png')
+		  //   ],
 		    [
 		    	'id' => 4,
 				'name' => HELP,

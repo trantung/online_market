@@ -19,8 +19,8 @@ class ApiProductController extends ApiController {
 					$value->image_url = url(PRODUCT_UPLOAD . '/' . $product->user_id . '/' . $value->image_url);
 				}
 				$data = array(
-					'id' => $product->id,
-					'phone' => User::find($product->id)->phone,
+					'id' => $id,
+					'phone' => User::find($product->user_id)->phone,
 					'name' => $product->name,
 					'description' => $product->description,
 					'avatar' => url(PRODUCT_UPLOAD . '/' . $product->user_id . '/' . $product->avatar),

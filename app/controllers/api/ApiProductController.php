@@ -78,17 +78,17 @@ class ApiProductController extends ApiController {
 	public function listProductUser($id)
 	{
 		$input = Input::all();
-		$sessionId = Common::checkSessionLogin($input);
-		if($sessionId) {
-			$block = Common::checkBlackList($input['user_id'], $id);
-			if($block) {
-				$isPhone = null;
-			} else {
-				$isPhone = 1;
-			}
-		} else {
-			$isPhone = 1;
-		}
+		// $sessionId = Common::checkSessionLogin($input);
+		// if($sessionId) {
+		// 	$block = Common::checkBlackList($input['user_id'], $id);
+		// 	if($block) {
+		// 		$isPhone = null;
+		// 	} else {
+		// 		$isPhone = 1;
+		// 	}
+		// } else {
+		// 	$isPhone = 1;
+		// }
 		return CommonProduct::returnProduct(array('user_id'=>$id, 'status'=>ACTIVE));
 	}
 

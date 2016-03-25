@@ -52,12 +52,22 @@ class ApiProductController extends ApiController {
 	{
 		$input = Input::all();
 		$sessionId = Common::checkSessionLogin($input);
-		Favorite::create([
+		$check = CommonFavorite::checkFavoriteLike('Product', $id, TYPE_FAVORITE_SAVE, $input['user_id']);
+		if(!$check) {
+			Favorite::create([
 							'model_name' => 'Product',
 							'model_id' => $id,
 							'follow_id' => $input['user_id'],
 							'type_favorite' => TYPE_FAVORITE_SAVE
-						]);
+						]);	
+		} 
+		// else {
+		// 	Favorite::where('model_name', 'Product')
+		// 		->where('model_id', $id)
+		// 		->where('follow_id', $input['user_id'])
+		// 		->where('type_favorite', TYPE_FAVORITE_SAVE)
+		// 		->delete();
+		// }
 		return Common::returnData(200, SUCCESS, $input['user_id'], $input['session_id']);
 	}
 

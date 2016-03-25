@@ -93,8 +93,10 @@ Route::group(['prefix' => 'api'], function () {
 	//user profile->TODO
 	Route::get('/profile', 'ApiProfileController@index');
 	Route::post('/profile', 'ApiProfileController@post');
+
 	//verify user->later
 	Route::post('/verify_phone', 'ApiVerifyAccountController@index');
+	Route::post('/check_verify_phone', 'ApiVerifyAccountController@check');
 
 	//reset password user
 	Route::post('/resetpassword', 'ApiPasswordController@resetpassword');

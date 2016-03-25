@@ -31,6 +31,7 @@ class RegisterController extends ApiController {
         } else {
         	$input['password'] = Hash::make($input['password']);
         	$input['status'] = INACTIVE;
+        	$input['type'] = 1;
 			$userId = User::create($input)->id;
 			$sessionId = Common::getSessionId($input, $userId);
 			return Common::returnData(200, SUCCESS, $userId, $sessionId);

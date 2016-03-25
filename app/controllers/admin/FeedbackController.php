@@ -9,7 +9,7 @@ class FeedbackController extends AdminController {
 	 */
 	public function index()
 	{
-		$data = Feedback::orderBy('created_at', 'desc')->paginate(PAGINATE);
+		$data = Feedback::orderBy('id', 'desc')->paginate(PAGINATE);
 		return View::make('admin.feedback.index')->with(compact('data'));
 	}
 

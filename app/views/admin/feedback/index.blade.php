@@ -1,5 +1,4 @@
 @extends('admin.layout.default')
-@if(Admin::isAdmin())
 @section('title')
 {{ $title='Quản lý feedback' }}
 @stop
@@ -51,4 +50,3 @@
 
 @stop
 
-@endif

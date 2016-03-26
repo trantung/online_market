@@ -23,6 +23,7 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/manager/search', array('uses' => 'ManagerController@search', 'as' => 'admin.manager.search'));
 	Route::resource('/manager', 'ManagerController');
 
+	Route::resource('/feedback', 'FeedbackController');
 	Route::resource('/price', 'PriceController');
 	Route::resource('/category', 'CategoryController');
 	Route::get('/product/check/{id}', 'ProductController@check');
@@ -92,8 +93,10 @@ Route::group(['prefix' => 'api'], function () {
 	//user profile->TODO
 	Route::get('/profile', 'ApiProfileController@index');
 	Route::post('/profile', 'ApiProfileController@post');
+
 	//verify user->later
 	Route::post('/verify_phone', 'ApiVerifyAccountController@index');
+	Route::post('/check_verify_phone', 'ApiVerifyAccountController@check');
 
 	//reset password user
 	Route::post('/resetpassword', 'ApiPasswordController@resetpassword');

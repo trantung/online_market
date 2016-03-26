@@ -47,6 +47,9 @@ class CommonNormal
 		if($name == 'user') {
 			return 'User';
 		}
+		if($name == 'feedback') {
+			return 'Feedback';
+		}
 
 	}
 }

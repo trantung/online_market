@@ -109,4 +109,17 @@ class CommonProduct {
 		return 1;
 	}
 
+	public static function checkProductSaved($modelId, $followId)
+	{
+		$check = Favorite::where('model_name', 'Product')
+			->where('model_id', $modelId)
+			->where('follow_id', $followId)
+			->where('type_favorite', TYPE_FAVORITE_SAVE)
+			->first();
+		if ($check) {
+			return true;
+		}
+		return false;
+	}
+
 }

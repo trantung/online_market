@@ -11,8 +11,8 @@ class ApiPostController extends ApiController {
 	{
 		$input = Input::all();
 		$sessionId = Common::checkSessionLogin($input);
-		$categoryArray = CommonSearch::categoryFormArray();
-		$typeArray = selectProductType();
+		$categoryArray = CommonCategory::categoryArray();
+		$typeArray = CommonCategory::typeArray();
 		$data = array(
 				'categoryArray' => $categoryArray,
 				'typeArray' => $typeArray,

@@ -121,7 +121,7 @@ function priceArrangeString($min, $max = null)
 //list select field product
 function listFieldProduct()
 {
-	return ['id', 'name', 'avatar', 'price', 'price_id', 'category_id', 'user_id', 'type_id', 'city_id', 'start_time', 'status', 'position', 'deleted_at', 'created_at'];
+	return ['id', 'name', 'avatar', 'price', 'price_id', 'category_id', 'user_id', 'type_id', 'city_id', 'start_time', 'status', 'position', 'deleted_at', 'created_at', 'address'];
 }
 
 function listFieldSearch()

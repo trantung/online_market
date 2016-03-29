@@ -14,7 +14,7 @@ class CommonCategory
 	{
 		$type = [
 			['type_id' => 0,
-			'type_name' => 'Danh mục'],
+			'type_name' => 'Tình trạng sản phẩm'],
 			['type_id' => TYPEVALUE1,
 			'type_name' => TYPE1],
 			['type_id' => TYPEVALUE2,

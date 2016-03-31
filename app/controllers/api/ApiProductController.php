@@ -29,6 +29,7 @@ class ApiProductController extends ApiController {
 					'type_id' => $product->type_id,
 					'type_name' => getProductType($product->type_id),
 					'price' => getFullPriceInVnd($product->price) . ' đ',
+					'address' => $product->address,
 					'city' => $product->city,
 					// 'city_id' => $product->city_id,
 					// 'city_name' => City::find($product->city_id)->name,

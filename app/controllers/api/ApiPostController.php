@@ -41,6 +41,7 @@ class ApiPostController extends ApiController {
 				'long' => $input['long'],
 				'description' => $input['description'],
 				'avatar' => $input['avatar'],
+				'address' => $input['address'],
 				'city' => $input['city'],
 				'position' => 1,
 				'status' => INACTIVE,

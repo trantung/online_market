@@ -28,7 +28,7 @@
 							<th>Type</th>
 							<th>User</th>
 							<th>Category</th>
-							<th>City</th>
+							<!-- <th>City</th> -->
 							<th>Status</th>
 							<th style="width:260px;">Action</th>
 						</tr>
@@ -40,7 +40,7 @@
 								<td>{{ getProductType($value->type_id) }}</td>
 								<td>{{ User::find($value->user_id)->username }}</td>
 								<td>{{ Category::find($value->category_id)->name }}</td>
-								<td>{{ City::find($value->city_id)->name }}</td>
+								<!-- <td>{{-- City::find($value->city_id)->name --}}</td> -->
 								<td>{{ getProductStatus($value->status) }}</td>
 								<td>
 								@if($value->status == ACTIVE)

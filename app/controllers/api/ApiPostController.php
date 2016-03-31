@@ -41,7 +41,7 @@ class ApiPostController extends ApiController {
 				'long' => $input['long'],
 				'description' => $input['description'],
 				'avatar' => $input['avatar'],
-				'city_id' => $input['city_id'],
+				'city' => $input['city'],
 				'position' => 1,
 				'status' => INACTIVE,
 				'start_time' => Carbon\Carbon::now(),

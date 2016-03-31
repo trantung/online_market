@@ -19,33 +19,37 @@ class ApiMessageController extends ApiController {
 			->lists('sent_id');
 		$total = array_diff($data_recived, $data_sent);
 		$result = array_merge($total, $data_sent);
-		foreach($result as $key => $value) {
-			$msg =  Common::queryCommonMessage($input, $value);
-			$msg = $msg->orderBy('created_at', 'desc')->first();
-			$block = BlackList::where('user_id', $input['user_id'])
-				->where('black_id', $value)
-				->first();
+		if($result) {
+			foreach($result as $key => $value) {
+				$msg =  Common::queryCommonMessage($input, $value);
+				$msg = $msg->orderBy('created_at', 'desc')->first();
+				$block = BlackList::where('user_id', $input['user_id'])
+					->where('black_id', $value)
+					->first();
 
-			if($msg) {
-				if ($block) {
-					$blockUser = true;
+				if($msg) {
+					if ($block) {
+						$blockUser = true;
+					}
+					else {
+						$blockUser = false;
+					}
+					$data[] = array(
+							'id' => $msg->id,
+							'chat_avatar' => url(USER_AVATAR . '/' . $value . '/' . User::find($value)->avatar),
+							'chat_id' => $value,
+							'chat_name' => User::find($value)->username,
+							'message' => $msg->message,
+							'status' => $msg->status,
+							'created_at' => date('Y-m-d', strtotime($msg->created_at)),
+							'block' => $blockUser,
+						);
+				} else {
+					$data = null;
 				}
-				else {
-					$blockUser = false;
-				}
-				$data[] = array(
-						'id' => $msg->id,
-						'chat_avatar' => url(USER_AVATAR . '/' . $value . '/' . User::find($value)->avatar),
-						'chat_id' => $value,
-						'chat_name' => User::find($value)->username,
-						'message' => $msg->message,
-						'status' => $msg->status,
-						'created_at' => date('Y-m-d', strtotime($msg->created_at)),
-						'block' => $blockUser,
-					);
-			} else {
-				$data = null;
 			}
+		} else {
+			$data = null;
 		}
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 	}

@@ -43,6 +43,8 @@ class ApiMessageController extends ApiController {
 						'created_at' => date('Y-m-d', strtotime($msg->created_at)),
 						'block' => $blockUser,
 					);
+			} else {
+				$data = null;
 			}
 		}
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);

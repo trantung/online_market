@@ -24,7 +24,8 @@ class LoginController extends ApiController {
 			$userId = User::create([
 					'username' => $input['username'],
 					'facebook_id' => $input['facebook_id'],
-					'google_id' => $input['google_id']
+					'google_id' => $input['google_id'],
+					'status' => INACTIVE,
 				])->id;
 			Device::create([
 					'user_id' => $userId,

@@ -47,7 +47,7 @@ class CommonProduct {
 			//lat long
 			
 			
-			if ($input['ids']) {
+			if (!empty($input['ids'])) {
 				$query = $query->whereIn('id', $input['ids']);
 			}
 		})->select(listFieldProduct())->orderBy('position', 'asc')->get();
@@ -82,9 +82,13 @@ class CommonProduct {
 		if(isset($options['user_id'])) {
 			$user = User::find($options['user_id']);	
 		}
+		if (empty($input['ids'])) {
+			$data = null;
+		}
 		if(isset($options['user_id']) && isset($options['isPhone']) && count($user) > 0) {
 			$data = ['products' => CommonProduct::getProduct($options), 'phone' => $user->phone];	
-		} else {
+		} 
+		else {
 			$data = CommonProduct::getProduct($options);
 		}
 		return Common::returnData(200, SUCCESS, $input['user_id'], $input['session_id'], $data);

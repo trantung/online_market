@@ -47,7 +47,7 @@ class CommonProduct {
 			//lat long
 			
 			
-			if (!empty($input['ids'])) {
+			if ($input['ids']) {
 				$query = $query->whereIn('id', $input['ids']);
 			}
 		})->select(listFieldProduct())->orderBy('position', 'asc')->get();

@@ -81,7 +81,6 @@ class CommonSearch {
 				'category_id' => $category_id,
 				'type_id' => $type_id,
 				'time_id' => $time_id,
-				// 'priceArray' => $priceArray,
 				'categoryArray' => $categoryArray,
 				'typeArray' => $typeArray,
 				'timeArray' => $timeArray,

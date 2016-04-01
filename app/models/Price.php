@@ -11,4 +11,14 @@ class Price extends Eloquent
     protected $fillable = ['min', 'max'];
     protected $dates = ['deleted_at'];
 
+    public function categories()
+    {
+        return $this->belongsToMany('Category', 'category_price', 'price_id', 'category_id');
+    }
+
+    public function categoryprices()
+    {
+        return $this->hasMany('CategoryPrice', 'price_id', 'id');
+    }
+
 }

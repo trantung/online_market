@@ -23,4 +23,14 @@ class CommonCategory
 		];
 		return $type;
 	}
+
+	public static function getPriceIdByCategoryId($categoryId)
+	{
+		$priceIds = CategoryPrice::where('category_id', $categoryId)->groupBy('price_id')->lists('price_id');
+		if($priceIds) {
+			return $priceIds;
+		}
+		return null;
+	}
+
 }

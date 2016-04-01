@@ -9,6 +9,7 @@ class CommonProduct {
 
 	public static function getProduct($input = array())
 	{
+		dd($input);
 		$result = Product::where(function ($query) use ($input){
 			if (!empty($input['user_id'])) {
 				$query = $query->where('user_id', $input['user_id']);
@@ -24,6 +25,9 @@ class CommonProduct {
 			}
 			if (!empty($input['city_id'])) {
 				$query = $query->where('city_id', $input['city_id']);
+			}
+			if (!empty($input['city'])) {
+				$query = $query->where('city', $input['city']);
 			}
 			if (!empty($input['status'])) {
 				$query = $query->where('status', $input['status']);
@@ -43,7 +47,7 @@ class CommonProduct {
 			}
 			//lat long
 			
-
+			
 			if (!empty($input['ids'])) {
 				$query = $query->whereIn('id', $input['ids']);
 			}

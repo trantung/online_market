@@ -41,6 +41,13 @@ class CategoryController extends AdminController {
 	            ->withErrors($validator);
         } else {
         	$id = Category::create($input)->id;
+
+        	$data = Category::find($id);
+
+			if($data) {
+				RelationBox::insertRelationship($data, 'prices', Input::get('price_id'));
+			}
+
     		return Redirect::action('CategoryController@index');
         }
 	}
@@ -89,6 +96,13 @@ class CategoryController extends AdminController {
 	            ->withErrors($validator);
         } else {
         	CommonNormal::update($id, $input);
+
+        	$data = Category::find($id);
+
+			if($data) {
+				RelationBox::updateRelationship($data, 'prices', Input::get('price_id'));
+			}
+
     		return Redirect::action('CategoryController@index');
         }
 	}
@@ -102,8 +116,13 @@ class CategoryController extends AdminController {
 	 */
 	public function destroy($id)
 	{
-		CommonNormal::delete($id);
-        return Redirect::action('CategoryController@index');
+		$data = Category::find($id);
+		if ($data) {
+			RelationBox::deleteRelationship($data, 'prices');
+			CommonNormal::delete($id);
+			return Redirect::action('CategoryController@index')->with('message', 'Đã xóa');
+		}
+        return Redirect::action('CategoryController@index')->with('message', 'Không tồn tại');
 	}
 
 

@@ -25,6 +25,15 @@ class CommonSearch {
 			if (!empty($input['time_id'])) {
 				$query = $query->where('time_id', $input['time_id']);
 			}
+			if (!empty($input['city_id'])) {
+				$query = $query->where('city_id', $input['city_id']);
+			}
+			if (!empty($input['city'])) {
+				$query = $query->where('city', $input['city']);
+			}
+			if (!empty($input['status'])) {
+				$query = $query->where('status', $input['status']);
+			}
 			if (!empty($input['name'])) {
 				$query = $query->where('name', 'like', '%'.$input['name'].'%');
 			}
@@ -80,10 +89,12 @@ class CommonSearch {
 		return $data;
 	}
 
-	public static function priceFormArray()
+	public static function priceFormArray($notNull = null)
 	{
 		$obj = Price::all();
-		$array[''] = '- Không chọn';
+		if($notNull == null) {
+			$array[''] = '- Không chọn';	
+		}
 		if(count($obj) > 0) {
 			foreach($obj as $value) {
 				$array[$value->id] = priceArrangeString($value->min, $value->max);

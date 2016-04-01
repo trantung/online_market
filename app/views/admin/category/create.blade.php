@@ -26,6 +26,16 @@
 							</div>
 						</div>
 					</div>
+
+					<div class="form-group">
+						<label for="name">Giá</label>
+						<div class="row">
+							<div class="col-sm-6">
+								{{ Form::select('price_id[]', CommonSearch::priceFormArray(1), NULL, array('class' => 'form-control', 'multiple' => true)) }}
+							</div>
+						</div>
+					</div>
+
 				</div>
 				<!-- /.box-body -->
 

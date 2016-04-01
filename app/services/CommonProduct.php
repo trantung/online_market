@@ -86,7 +86,7 @@ class CommonProduct {
 		if(isset($options['user_id']) && isset($options['isPhone']) && count($user) > 0) {
 			$data = ['products' => CommonProduct::getProduct($options), 'phone' => $user->phone];	
 		} 
-		elseif(empty($input['ids'])) {
+		elseif(isset($input['ids']) && empty($input['ids'])) {
 				$data = [];
 		}
 		else{

@@ -87,7 +87,7 @@ class CommonProduct {
 			$data = ['products' => CommonProduct::getProduct($options), 'phone' => $user->phone];	
 		} 
 		elseif(empty($input['ids'])) {
-				$data = null;
+				$data = [];
 		}
 		else{
 			$data = CommonProduct::getProduct($options);

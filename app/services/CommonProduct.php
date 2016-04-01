@@ -45,7 +45,7 @@ class CommonProduct {
 				$query = $query->where('start_time', '<=', $input['end_date']);
 			}
 			//lat long
-			
+			dd($input);
 			
 			if (!empty($input['ids'])) {
 				$query = $query->whereIn('id', $input['ids']);
@@ -86,9 +86,9 @@ class CommonProduct {
 		if(isset($options['user_id']) && isset($options['isPhone']) && count($user) > 0) {
 			$data = ['products' => CommonProduct::getProduct($options), 'phone' => $user->phone];	
 		} 
-		elseif(isset($input['ids']) && empty($input['ids'])) {
-				$data = [];
-		}
+		// elseif(isset($input['ids']) && empty($input['ids'])) {
+		// 		$data = [];
+		// }
 		else{
 			$data = CommonProduct::getProduct($options);
 		}

@@ -9,8 +9,6 @@ class ApiSearchController extends ApiController {
 	 */
 	public function index($id)
 	{
-		// $d = vincentyGreatCircleDistance(21.017905, 105.809192, 21.006047, 105.793399);
-		// dd($d);
 		$input = Input::all();
 		$data = CommonSearch::searchFormData($id);
 		return Common::returnData(200, SUCCESS, $input['user_id'], $input['session_id'], $data);

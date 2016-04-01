@@ -9,7 +9,6 @@ class CommonProduct {
 
 	public static function getProduct($input = array())
 	{
-		dd($input);
 		$result = Product::where(function ($query) use ($input){
 			if (!empty($input['user_id'])) {
 				$query = $query->where('user_id', $input['user_id']);

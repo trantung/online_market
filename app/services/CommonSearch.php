@@ -81,7 +81,7 @@ class CommonSearch {
 				'category_id' => $category_id,
 				'type_id' => $type_id,
 				'time_id' => $time_id,
-				'priceArray' => $priceArray,
+				// 'priceArray' => $priceArray,
 				'categoryArray' => $categoryArray,
 				'typeArray' => $typeArray,
 				'timeArray' => $timeArray,
@@ -106,15 +106,26 @@ class CommonSearch {
 	public static function categoryFormArray()
 	{
 		$obj = Category::all();
-		$array[''] = '- Danh mục';
-		if(count($obj) > 0) {
-			foreach($obj as $value) {
-				$array[$value->id] = $value->name;
-			}
+		$array = [];
+		foreach ($obj as $key => $value) {
+			$array[$key]['category_name'] = $value->name;
+			$array[$key]['category_id'] = $value->id;
+			$array[$key]['price'] = self::getPriceIdCategory($value);
 		}
 		return $array;
 	}
+	public static function getPriceIdCategory($category)
+	{
+		$price = $category->prices;
+		$array = [];
+		foreach($price as $k => $v) {
+			$array[$k]['price_id'] = $v->id;
+			$array[$k]['start']= $v->min;
+			$array[$k]['end'] = $v->max;
+		}
+		return $array;
 
+	}
 	public static function searchFilter($input)
 	{
 		//

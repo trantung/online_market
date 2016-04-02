@@ -56,7 +56,8 @@ class ProductController extends AdminController {
 	 */
 	public function edit($id)
 	{
-		//
+		$data = Product::find($id);
+		return View::make('admin.product.edit')->with(compact('data'));
 	}
 
 
@@ -68,7 +69,24 @@ class ProductController extends AdminController {
 	 */
 	public function update($id)
 	{
-		//
+		$rules = array(
+			'name'   => 'required',
+			'description'   => 'required',
+			'price'   => 'required|integer|min:1000',
+			'category_id'   => 'required',
+			'type_id'   => 'required',
+			'address'   => 'required',
+		);
+		$input = Input::except('_token');
+		$validator = Validator::make($input, $rules);
+		if($validator->fails()) {
+			return Redirect::action('ProductController@edit', $id)
+	            ->withErrors($validator);
+        } else {
+        	$input['price_id'] = CommonProduct::getPriceId($input['price']);
+			CommonNormal::update($id, $input);
+			return Redirect::action('ProductController@index')->with('message', 'Đã sửa');
+    	}
 	}
 
 
@@ -81,16 +99,16 @@ class ProductController extends AdminController {
 	public function destroy($id)
 	{
 		CommonNormal::delete($id);
-        return Redirect::action('ProductController@index');
+        return Redirect::action('ProductController@index')->with('message', 'Đã xóa');
 	}
 
 	public function check($id)
 	{
 		$status = Product::find($id)->status;
 		if($status == ACTIVE) {
-			$input = ['status' => INACTIVE];
+			$input = ['status' => INACTIVE, 'start_time' => Carbon\Carbon::now()];
 		} else {
-			$input = ['status' => ACTIVE];
+			$input = ['status' => ACTIVE, 'start_time' => Carbon\Carbon::now()];
 		}
 		CommonNormal::update($id, $input);
 		return Redirect::action('ProductController@index');
@@ -98,7 +116,7 @@ class ProductController extends AdminController {
 
 	public function refuse($id)
 	{
-		CommonNormal::update($id, ['status' => REFUSE]);
+		CommonNormal::update($id, ['status' => REFUSE, 'start_time' => Carbon\Carbon::now()]);
 		return Redirect::action('ProductController@index');
 	}
 

@@ -30,7 +30,7 @@
 							<th>Category</th>
 							<!-- <th>City</th> -->
 							<th>Status</th>
-							<th style="width:260px;">Action</th>
+							<th style="width:300px;">Action</th>
 						</tr>
 						@foreach($data as $key => $value)
 							<tr>
@@ -51,6 +51,7 @@
 								{{ Form::open(array('method'=>'GET', 'action' => array('ProductController@refuse', $value->id), 'style' => 'display: inline-block;')) }}
 									<button class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn từ chối?');">Từ chối</button>
 								{{ Form::close() }}
+								<a href="{{ action('ProductController@edit', $value->id) }}" class="btn btn-primary">Sửa</a>
 								{{ Form::open(array('method'=>'DELETE', 'action' => array('ProductController@destroy', $value->id), 'style' => 'display: inline-block;')) }}
 									<button class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</button>
 								{{ Form::close() }}

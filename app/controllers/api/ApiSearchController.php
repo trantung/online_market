@@ -17,8 +17,7 @@ class ApiSearchController extends ApiController {
 	public function action()
 	{
 		$input = Input::all();
-		$input['status'] = ACTIVE;
-		$data = CommonProduct::getProduct($input);
+		$data = CommonSearch::getSearch($input);
 		return Common::returnData(200, SUCCESS, $input['user_id'], $input['session_id'], $data);
 	}
 

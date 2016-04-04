@@ -19,6 +19,7 @@ class CommonFavorite {
 		$result = Favorite::where('follow_id', $input['follow_id'])
 			->where('model_name', $input['model_name'])
 			->where('type_favorite', $input['type_favorite'])
+			->distinct()
 			->lists('model_id');
 		return $result;
 	}

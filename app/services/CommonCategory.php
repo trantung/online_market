@@ -24,4 +24,19 @@ class CommonCategory
 		return $type;
 	}
 
+	public static function timeArray()
+	{
+		return array(
+			['time_id' => 0,
+			'time_name' => '-- Lựa chọn'],
+			['time_id' => TIMEVALUE1,
+			'time_name' => TIME1],
+			['time_id' => TIMEVALUE2,
+			'time_name' => TIME2],
+			['time_id' => TIMEVALUE3,
+			'time_name' => TIME3],
+
+		);
+	}
+
 }

@@ -73,8 +73,10 @@ class CommonSearch {
 	{
 		$priceArray = self::priceFormArray();
 		$categoryArray = self::categoryFormArray();
-		$typeArray = selectProductType();
-		$timeArray = selectProductTime();
+		// $categoryArray = CommonCategory::categoryArray();
+		// $typeArray = selectProductType();
+		$typeArray = CommonCategory::typeArray();
+		$timeArray = CommonCategory::timeArray();
 		$id = null;
 		$name = null;
 		$lat = null;

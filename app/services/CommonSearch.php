@@ -31,7 +31,6 @@ class CommonSearch {
 			}
 			//lat long
 
-			$query = $query->where('status', ACTIVE);
 		})->select(listFieldSearch())->get();
 		return $result;
 	}

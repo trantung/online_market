@@ -3,13 +3,13 @@ class CommonSearch {
 
 	public static function countSearch($input = array())
 	{
-		$result = self::getSearch($input);
+		$result = self::getSearch($input, 'Search');
 		return count($result);
 	}
 
-	public static function getSearch($input = array())
+	public static function getSearch($input = array(), $modelName = 'Product')
 	{
-		$result = Product::where(function ($query) use ($input){
+		$result = $modelName::where(function ($query) use ($input){
 			if (!empty($input['category_id'])) {
 				$query = $query->where('category_id', $input['category_id']);
 			}
@@ -22,9 +22,6 @@ class CommonSearch {
 			if (!empty($input['time_id'])) {
 				$inputDate = getTime($input['time_id']);
 				$query = $query->where('start_time', '>=', $inputDate);
-			}
-			if (!empty($input['city_id'])) {
-				$query = $query->where('city_id', $input['city_id']);
 			}
 			if (!empty($input['city'])) {
 				$query = $query->where('city', $input['city']);

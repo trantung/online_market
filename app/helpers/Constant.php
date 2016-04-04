@@ -64,8 +64,8 @@ define('USER_AVATAR', '/images/users');
 define('USER_AVATAR_WIDTH', 200);
 define('USER_AVATAR_HEIGHT', 200);
 //define product size avatar
-define('PRODUCT_AVATAR_WIDTH', 300);
-define('PRODUCT_AVATAR_HEIGHT', 300);
+define('PRODUCT_AVATAR_WIDTH', 800);
+define('PRODUCT_AVATAR_HEIGHT', 600);
 //define product size slide
 define('PRODUCT_SLIDE_WIDTH', 800);
 define('PRODUCT_SLIDE_HEIGHT', 600);

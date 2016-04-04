@@ -5,15 +5,15 @@ class CommonFavorite {
 	{
 		$result = DB::table('favorites')
 						->join('products', 'favorites.model_id', '=', 'products.id')
-						->select('favorites.model_id')
+						->select('favorites.*')
 						->where('favorites.follow_id', $input['follow_id'])
 						->where('favorites.model_name', $input['model_name'])
 						->where('favorites.type_favorite', $input['type_favorite'])
 						->where('products.status', ACTIVE)
 						->whereNotNull('products.deleted_at')
-						->count();
+						->get();
 		// $result = self::getFavorite($input);
-		return $result;
+		return count($result);
 	}
 
 	public static function getFavorite($input = array())

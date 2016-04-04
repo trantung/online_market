@@ -28,7 +28,7 @@ class CommonCategory
 	{
 		return array(
 			['time_id' => 0,
-			'time_name' => '-- Lựa chọn'],
+			'time_name' => '-- Chọn thời gian'],
 			['time_id' => TIMEVALUE1,
 			'time_name' => TIME1],
 			['time_id' => TIMEVALUE2,

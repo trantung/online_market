@@ -3,13 +3,13 @@ class CommonSearch {
 
 	public static function countSearch($input = array())
 	{
-		$result = self::getSearch($input, 'Search');
+		$result = self::getSearchLog($input);
 		return count($result);
 	}
 
-	public static function getSearch($input = array(), $modelName = 'Product')
+	public static function getSearchLog($input = array())
 	{
-		$result = $modelName::where(function ($query) use ($input){
+		$result = Search::where(function ($query) use ($input){
 			if (!empty($input['category_id'])) {
 				$query = $query->where('category_id', $input['category_id']);
 			}
@@ -22,6 +22,38 @@ class CommonSearch {
 			if (!empty($input['time_id'])) {
 				$inputDate = getTime($input['time_id']);
 				$query = $query->where('start_time', '>=', $inputDate);
+			}
+			if (!empty($input['city'])) {
+				$query = $query->where('city', $input['city']);
+			}
+			if (!empty($input['name'])) {
+				$query = $query->where('name', 'like', '%'.$input['name'].'%');
+			}
+			//lat long
+
+			$query = $query->where('status', ACTIVE);
+		})->select(listFieldSearch())->get();
+		return $result;
+	}
+
+	public static function getSearch($input = array())
+	{
+		$result = Product::where(function ($query) use ($input){
+			if (!empty($input['category_id'])) {
+				$query = $query->where('category_id', $input['category_id']);
+			}
+			if (!empty($input['type_id'])) {
+				$query = $query->where('type_id', $input['type_id']);
+			}
+			if (!empty($input['price_id'])) {
+				$query = $query->where('price_id', $input['price_id']);
+			}
+			if (!empty($input['time_id'])) {
+				$inputDate = getTime($input['time_id']);
+				$query = $query->where('start_time', '>=', $inputDate);
+			}
+			if (!empty($input['city_id'])) {
+				$query = $query->where('city_id', $input['city_id']);
 			}
 			if (!empty($input['city'])) {
 				$query = $query->where('city', $input['city']);

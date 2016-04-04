@@ -10,7 +10,7 @@ class CommonFavorite {
 						->where('favorites.model_name', $input['model_name'])
 						->where('favorites.type_favorite', $input['type_favorite'])
 						->where('products.status', ACTIVE)
-						->whereNotNull('products.deleted_at')
+						->whereNull('products.deleted_at')
 						->get();
 		// $result = self::getFavorite($input);
 		return count($result);

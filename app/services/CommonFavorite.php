@@ -3,8 +3,18 @@ class CommonFavorite {
 
 	public static function countFavorite($input = array())
 	{
-		$result = self::getFavorite($input);
-		return count($result);
+		$result = DB::table('favorites')
+						->join('products', 'favorites.model_id', '=', 'products.id')
+						->select('favorites.model_id')
+						->where('favorites.follow_id', $input['follow_id'])
+						->where('favorites.model_name', $input['model_name'])
+						->where('favorites.type_favorite', $input['type_favorite'])
+						->where('products.status', ACTIVE)
+						->whereNotNull('products.deleted_at')
+						->distinct()
+						->count();
+		// $result = self::getFavorite($input);
+		return $result;
 	}
 
 	public static function getFavorite($input = array())

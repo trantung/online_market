@@ -44,7 +44,7 @@ class CommonSetting {
 				'name' => PRODUCT_LOG,
 				'link' => url('api/product_log'),
 				'method' => 'POST',
-				'quantity' => CommonFavorite::countFavorite(array('model_name'=>'Product', 'follow_id'=>$input['user_id'], 'type_favorite' => TYPE_FAVORITE_LIKE)),
+				'quantity' => CommonFavorite::countFavorite(array('model_name'=>'Product', 'follow_id'=>$input['user_id'], 'type_favorite' => TYPE_FAVORITE_SAVE)),
 				'image_url' => url('images/icons/44.png')
 		    ],
 		    [

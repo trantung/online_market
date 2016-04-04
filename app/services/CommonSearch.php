@@ -10,6 +10,9 @@ class CommonSearch {
 	public static function getSearchLog($input = array())
 	{
 		$result = Search::where(function ($query) use ($input){
+			if (!empty($input['user_id'])) {
+				$query = $query->where('user_id', $input['user_id']);
+			}
 			if (!empty($input['category_id'])) {
 				$query = $query->where('category_id', $input['category_id']);
 			}
@@ -22,9 +25,6 @@ class CommonSearch {
 			if (!empty($input['time_id'])) {
 				$inputDate = getTime($input['time_id']);
 				$query = $query->where('start_time', '>=', $inputDate);
-			}
-			if (!empty($input['city'])) {
-				$query = $query->where('city', $input['city']);
 			}
 			if (!empty($input['name'])) {
 				$query = $query->where('name', 'like', '%'.$input['name'].'%');

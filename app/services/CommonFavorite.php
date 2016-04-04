@@ -11,10 +11,9 @@ class CommonFavorite {
 						->where('favorites.type_favorite', $input['type_favorite'])
 						->where('products.status', ACTIVE)
 						->whereNotNull('products.deleted_at')
-						->distinct()
-						->get();
+						->count();
 		// $result = self::getFavorite($input);
-		return count($result);
+		return $result;
 	}
 
 	public static function getFavorite($input = array())

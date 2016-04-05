@@ -38,8 +38,8 @@
 								<td>{{ $value->name }}</td>
 								<td>{{ getFullPriceInVnd($value->price) }}</td>
 								<td>{{ getProductType($value->type_id) }}</td>
-								<td>{{ User::find($value->user_id)->username }}</td>
-								<td>{{ Category::find($value->category_id)->name }}</td>
+								<td>{{ Common::getModelField($value->user_id, 'User', 'username') }}</td>
+								<td>{{ Common::getModelField($value->category_id, 'Category', 'name') }}</td>
 								<!-- <td>{{-- City::find($value->city_id)->name --}}</td> -->
 								<td>{{ getProductStatus($value->status) }}</td>
 								<td>

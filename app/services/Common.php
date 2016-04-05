@@ -177,4 +177,13 @@ class Common {
 		return $heart1;
 	}
 
+	public static function getModelField($modelId, $modelName, $field)
+	{
+		$data = $modelName::find($modelId);
+		if($data) {
+			return $data->$field;
+		}
+		return '';
+	}
+
 }

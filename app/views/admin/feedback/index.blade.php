@@ -19,14 +19,14 @@
 							<th style="width:50%;">Message</th>
 							<th>User</th>
 							<th>Product</th>
-							<th style="width:260px;">Action</th>
+							<th style="width:200px;">Action</th>
 						</tr>
 						@foreach($data as $key => $value)
 							<tr>
 								<td>{{ $value->id }}</td>
 								<td>{{ nl2br($value->message) }}</td>
-								<td>{{ User::find($value->user_id)->username }}</td>
-								<td>{{ Product::find($value->product_id)->name }}</td>
+								<td>{{ Common::getModelField($value->user_id, 'User', 'username') }}</td>
+								<td>{{ Common::getModelField($value->product_id, 'Product', 'name') }}</td>
 								<td>
 								{{ Form::open(array('method'=>'DELETE', 'action' => array('FeedbackController@destroy', $value->id), 'style' => 'display: inline-block;')) }}
 									<button class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</button>

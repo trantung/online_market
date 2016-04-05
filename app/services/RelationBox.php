@@ -28,29 +28,5 @@ class RelationBox
 			$data->$relation()->detach();
 		}
 	}
-//Relation get name 
-	public static function getNameBox($value, $modelName, $modelId)
-	{
-		if($value->$modelName == CATEGORYPARENT) {
-		$position = CategoryParent::find($value->$modelId)->position;
-		if ($position == MENU) {
-			return MENURELATION;
-		}
-		if ($position == CONTENT) {
-			return CONTENTREATION;
-		}
-		return CONTENT_REATION;
-	}
-	return TYPE;
-	}
-	//Relation get category
-	public static function getCategoryRelation($value, $modelName)
-	{
-		$data = $modelName::find($value);
-		if($data)
-		{
-			return $data->name;
-		}
-		return null;
-	}
+
 }

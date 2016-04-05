@@ -133,6 +133,9 @@ class Common {
 
 	public static function checkBlackList($userId, $blackId)
 	{
+		if($userId == $blackId) {
+			return true;
+		}
 		$blacklist = BlackList::where('user_id', $userId)
 						->where('black_id', $blackId)
 						->first();
@@ -140,9 +143,6 @@ class Common {
 						->where('black_id', $userId)
 						->first();
 		if(isset($blacklist) || isset($blacklist2)) {
-			return true;
-		}
-		elseif($userId == $blackId) {
 			return true;
 		}
 		return false;

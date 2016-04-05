@@ -142,6 +142,9 @@ class Common {
 		if(isset($blacklist) || isset($blacklist2)) {
 			return true;
 		}
+		elseif($userId == $blackId) {
+			return true;
+		}
 		return false;
 	}
 

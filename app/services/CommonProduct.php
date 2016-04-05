@@ -53,6 +53,7 @@ class CommonProduct {
 		
 		foreach ($result as $key => $value) {
 			$value->avatar = url(PRODUCT_UPLOAD . '/' . $value->user_id . '/' . Product::find($value->id)->avatar);
+			$value->block = Common::checkBlackList(Input::get('user_id'), $value->user_id);
 		}
 		return $result;
 	}
@@ -64,6 +65,7 @@ class CommonProduct {
 			->select(listFieldProduct())->orderBy('position', 'asc')->get();
 		foreach ($result as $key => $value) {
 			$value->avatar = url(PRODUCT_UPLOAD . '/' . $value->user_id . '/' . $value->avatar);
+			$value->block = Common::checkBlackList(Input::get('user_id'), $value->user_id);
 		}
 		return $result;
 	}

@@ -113,14 +113,16 @@ class Common {
 		if ($table) {
 			$inputMsg = [
 				'sent_id' => $input['user_id'],
-				'receiver_id' => $table::find($id)->user_id,
+				// 'receiver_id' => $table::find($id)->user_id,
+				'receiver_id' => $id,
 				'message' => $input['message'],
 				'status' => INACTIVE
 			];
 		}else {
 			$inputMsg = [
 				'sent_id' => $input['user_id'],
-				'receiver_id' => Product::find($id)->user_id,
+				// 'receiver_id' => Product::find($id)->user_id,
+				'receiver_id' => $id,
 				'message' => $input['message'],
 				'status' => INACTIVE
 			];

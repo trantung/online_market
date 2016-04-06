@@ -189,7 +189,7 @@ class Common {
 	public static function listCity()
 	{
 		$city = City::lists('name', 'id');
-		$cityArray = array();
+		$cityArray = ['city_id' => 0, 'city_name' => '- Chọn thành phố'];
 		if($city) {
 			foreach($city as $key => $value) {
 				$cityArray[] = ['city_id' => $key, 'city_name' => $value];

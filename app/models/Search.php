@@ -3,6 +3,7 @@
 class Search extends Eloquent
 {
     protected $table = 'searchs';
-    protected $fillable = ['user_id', 'category_id', 'type_id', 'price_id', 'name', 'lat', 'long', 'time_id'];
+    protected $fillable = ['user_id', 'category_id', 'type_id'
+    	, 'price_id', 'name', 'lat', 'long', 'time_id', 'city_id', 'city'];
 
 }

@@ -26,6 +26,12 @@ class CommonSearch {
 				$inputDate = getTime($input['time_id']);
 				$query = $query->where('start_time', '>=', $inputDate);
 			}
+			if (!empty($input['city_id'])) {
+				$query = $query->where('city_id', $input['city_id']);
+			}
+			if (!empty($input['city'])) {
+				$query = $query->where('city', $input['city']);
+			}
 			if (!empty($input['name'])) {
 				$query = $query->where('name', 'like', '%'.$input['name'].'%');
 			}
@@ -64,6 +70,11 @@ class CommonSearch {
 
 			$query = $query->where('status', ACTIVE);
 		})->select(listFieldProduct())->get();
+
+		foreach ($result as $key => $value) {
+			$value->avatar = url(PRODUCT_UPLOAD . '/' . $value->user_id . '/' . Product::find($value->id)->avatar);
+			$value->block = Common::checkBlackList(Input::get('user_id'), $value->user_id);
+		}
 		return $result;
 	}
 
@@ -77,6 +88,7 @@ class CommonSearch {
 		// $typeArray = selectProductType();
 		$typeArray = CommonCategory::typeArray();
 		$timeArray = CommonCategory::timeArray();
+		$cityArray = Common::listCity();
 		$id = null;
 		$name = null;
 		$lat = null;
@@ -96,6 +108,7 @@ class CommonSearch {
 				$category_id = $search->category_id;
 				$type_id = $search->type_id;
 				$time_id = $search->time_id;
+				$city = $search->city;
 			}
 		}
 		$data = array(
@@ -110,6 +123,7 @@ class CommonSearch {
 				'categoryArray' => $categoryArray,
 				'typeArray' => $typeArray,
 				'timeArray' => $timeArray,
+				'cityArray' => $cityArray,
 			);
 		return $data;
 	}

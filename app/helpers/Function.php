@@ -126,7 +126,7 @@ function listFieldProduct()
 
 function listFieldSearch()
 {
-	return ['id', 'name', 'price_id', 'category_id', 'user_id', 'type_id', 'time_id', 'lat', 'long', 'created_at'];
+	return ['id', 'name', 'price_id', 'category_id', 'user_id', 'type_id', 'time_id', 'city_id', 'city', 'lat', 'long', 'created_at'];
 }
 
 function listFieldUser()

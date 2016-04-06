@@ -13,9 +13,11 @@ class ApiPostController extends ApiController {
 		$sessionId = Common::checkSessionLogin($input);
 		$categoryArray = CommonCategory::categoryArray();
 		$typeArray = CommonCategory::typeArray();
+		$cityArray = Common::listCity();
 		$data = array(
 				'categoryArray' => $categoryArray,
 				'typeArray' => $typeArray,
+				'cityArray' => $cityArray,
 			);
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 	}
@@ -42,7 +44,8 @@ class ApiPostController extends ApiController {
 				'description' => $input['description'],
 				'avatar' => $input['avatar'],
 				'address' => $input['address'],
-				'city' => $input['city'],
+				'city_id' => $input['city_id'],
+				'city' => Common::getModelField($input['city_id'], 'City', 'name'),
 				'position' => 1,
 				'status' => INACTIVE,
 				'start_time' => Carbon\Carbon::now(),

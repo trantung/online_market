@@ -186,4 +186,17 @@ class Common {
 		return '';
 	}
 
+	public static function listCity()
+	{
+		$city = City::lists('name', 'id');
+		$cityArray = array();
+		if($city) {
+			foreach($city as $key => $value) {
+				$cityArray[] = ['city_id' => $key, 'city_name' => $value];
+			}
+			return $cityArray;
+		}
+		return null;
+	}
+
 }

@@ -32,8 +32,10 @@ class ApiSearchController extends ApiController {
 				'category_id' => $input['category_id'],
 				'type_id' => $input['type_id'],
 				'time_id' => $input['time_id'],
-				'lat' => $input['lat'],
-				'long' => $input['long'],
+				'city_id' => $input['city_id'],
+				'city' 	  => Common::getModelField($input['city_id'], 'City', 'name'),
+				'lat'     => $input['lat'],
+				'long'    => $input['long'],
 				
 			];
 		Search::create($inputSearch);

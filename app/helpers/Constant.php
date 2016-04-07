@@ -27,6 +27,7 @@ define('PRODUCT_ACTIVE', 'Đã đăng');
 define('PRODUCT_INACTIVE', 'Chưa đăng');
 //lengh random string
 define('RANDOMSTRING', 16);
+define('CODEPHONE', 6);
 //define label setting menu
 define('PRODUCT_LOG', 'Tin đã lưu');
 define('SEARCH_LOG', 'Tìm kiếm đã lưu');

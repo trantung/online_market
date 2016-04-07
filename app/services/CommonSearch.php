@@ -97,6 +97,7 @@ class CommonSearch {
 		$category_id = null;
 		$type_id = null;
 		$time_id = null;
+		$city_id = null;
 		if($searchId > 0) {
 			$search = Search::find($searchId);
 			if(count($search) > 0) {
@@ -104,6 +105,7 @@ class CommonSearch {
 				$name = $search->name;
 				$lat = $search->lat;
 				$long = $search->long;
+				$city_id = $search->city_id;
 				$price_id = $search->price_id;
 				$category_id = $search->category_id;
 				$type_id = $search->type_id;
@@ -116,6 +118,7 @@ class CommonSearch {
 				'name' => $name,
 				'lat' => $lat,
 				'long' => $long,
+				'city_id' => $city_id,
 				'price_id' => $price_id,
 				'category_id' => $category_id,
 				'type_id' => $type_id,

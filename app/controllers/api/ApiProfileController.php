@@ -13,6 +13,7 @@ class ApiProfileController extends ApiController {
 		$sessionId = Common::checkSessionLogin($input);
 		$data = User::find($input['user_id']);
 		$data->avatar = url(USER_AVATAR . '/' . $input['user_id'] . '/' . $data->avatar);
+		dd($data);
 		if ($data == null) {
 			$data = [];
 		}

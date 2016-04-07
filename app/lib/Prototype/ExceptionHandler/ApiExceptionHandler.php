@@ -4,10 +4,6 @@ namespace Prototype\ExceptionHandler;
 class ApiExceptionHandler {
 
     private function makeJsonResponse($code, $msg, $data = null) {
-        // if ($data == null) {
-        //     $data = new ObjectNullDefault;
-        // }
-        // dd($data);
         return \Response::json([
                 "code" => $code,
                 "message" => $msg,

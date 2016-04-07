@@ -83,13 +83,16 @@ class CommonProduct {
 		if(isset($options['user_id'])) {
 			$user = User::find($options['user_id']);	
 		}
+
+		$data = CommonProduct::getProduct($options);
 		
-		if(isset($options['user_id']) && count($user) > 0) {
-			$data = ['products' => CommonProduct::getProduct($options), 'phone' => $user->phone];	
-		} 
-		else{
-			$data = CommonProduct::getProduct($options);
-		}
+		// if(isset($options['user_id']) && count($user) > 0) {
+		// 	$data = ['products' => CommonProduct::getProduct($options), 'phone' => $user->phone];	
+		// } 
+		// else{
+		// 	$data = CommonProduct::getProduct($options);
+		// }
+		
 		return Common::returnData(200, SUCCESS, $input['user_id'], $input['session_id'], $data);
 	}
 

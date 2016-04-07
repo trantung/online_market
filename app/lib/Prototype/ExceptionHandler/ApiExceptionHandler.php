@@ -5,7 +5,7 @@ class ApiExceptionHandler {
 
     private function makeJsonResponse($code, $msg, $data = null) {
         if ($data == null) {
-            $data = [];
+            $data = new ObjectNullDefault;
         }
         return \Response::json([
                 "code" => $code,

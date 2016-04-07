@@ -47,6 +47,10 @@ class ApiSearchController extends ApiController {
 		$input = Input::all();
 		$sessionId = Common::checkSessionLogin($input);
 		$data = Search::where('user_id', $input['user_id'])->select(listFieldSearch())->get();
+		foreach ($data as $key => $value) {
+			$categoryName = Category::find($value->category_id)->name;
+			$value->name = $value->name . '-' . $categoryName . '-' . $value->city;
+		}
 		return Common::returnData(200, SUCCESS, $input['user_id'], $sessionId, $data);
 	}
 

@@ -163,7 +163,12 @@ class CommonSearch {
 		foreach($price as $k => $v) {
 			$array[$k]['price_id'] = $v->id;
 			$array[$k]['start']= $v->min;
-			$array[$k]['end'] = $v->max;
+			if (!($v->max)) {
+				$array[$k]['end'] = 'trở lên';
+			}
+			else {
+				$array[$k]['end'] = $v->max;
+			}
 		}
 		return $array;
 

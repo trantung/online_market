@@ -84,7 +84,7 @@ class CommonProduct {
 			$user = User::find($options['user_id']);	
 		}
 		
-		if(isset($options['user_id']) && isset($options['isPhone']) && count($user) > 0) {
+		if(isset($options['user_id']) && count($user) > 0) {
 			$data = ['products' => CommonProduct::getProduct($options), 'phone' => $user->phone];	
 		} 
 		else{

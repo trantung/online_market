@@ -80,9 +80,9 @@ class CommonProduct {
 	{
 		$input = Input::all();
 		// neu tra ve phone cua user so huu product
-		if(isset($options['user_id'])) {
-			$user = User::find($options['user_id']);	
-		}
+		// if(isset($options['user_id'])) {
+		// 	$user = User::find($options['user_id']);	
+		// }
 
 		$data = CommonProduct::getProduct($options);
 		

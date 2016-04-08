@@ -62,8 +62,8 @@ define('PRODUCT_UPLOAD', '/images/products');
 //define upload user avatar
 define('USER_AVATAR', '/images/users');
 //define size avatar user
-define('USER_AVATAR_WIDTH', 200);
-define('USER_AVATAR_HEIGHT', 200);
+define('USER_AVATAR_WIDTH', 48);
+define('USER_AVATAR_HEIGHT', 48);
 //define product size avatar
 define('PRODUCT_AVATAR_WIDTH', 800);
 define('PRODUCT_AVATAR_HEIGHT', 600);

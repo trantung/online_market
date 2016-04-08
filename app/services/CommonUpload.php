@@ -21,7 +21,7 @@ class CommonUpload {
 							->save();
  					} else {
  						$image = Image::make(sprintf(''.$pathUpload.'/%s', $filename[$key]))
-							//->resize(USER_AVATAR_WIDTH, USER_AVATAR_HEIGHT)
+							->resize(USER_AVATAR_WIDTH, USER_AVATAR_HEIGHT)
 							->save();
  					}
 				}

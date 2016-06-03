@@ -145,5 +145,8 @@ Route::group(['prefix' => 'api'], function () {
 	//upload images product
 	Route::post('/upload_image/product', 'ApiUploadController@imageProduct');
 
+	Route::post('/moMessage', 'ApiSmsController@moMessage');
+	Route::post('/mtMessage', 'ApiSmsController@mtMessage');
+
 
 });

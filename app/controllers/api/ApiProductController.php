@@ -43,6 +43,7 @@ class ApiProductController extends ApiController {
 					'user_avatar' => url(USER_AVATAR . '/' . $product->user_id . '/' . User::find($product->user_id)->avatar),
 					'image_list' => $images,
 					'block' => Common::checkBlackList($input['user_id'], $product->user_id),
+					'favorite' => CommonFavorite::checkFavoriteLike('User', $product->user_id, TYPE_FAVORITE_LIKE, $input['user_id']),
 					'product_saved' => CommonProduct::checkProductSaved($product->id, $input['user_id']),
 				);
 			}
@@ -90,6 +91,7 @@ class ApiProductController extends ApiController {
 	public function listProductUser($id)
 	{
 		$input = Input::all();
+
 		// $sessionId = Common::checkSessionLogin($input);
 		// if($sessionId) {
 		// 	$block = Common::checkBlackList($input['user_id'], $id);

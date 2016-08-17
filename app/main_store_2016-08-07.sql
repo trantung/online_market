@@ -13,28 +13,34 @@ CREATE TABLE `users` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO `users` (`id`, `email`, `password`, `url`, `session_id`, `username`, `remember_token`, `created_at`, `updated_at`)
-VALUES
-	(1,'321432432trantunghn196@gmail.com','123456','tunglaso1',NULL,'tunglaso1',NULL,NULL,NULL),
-	(2,'trantunghn196@gmail.com',NULL,'tunglaso2',NULL,NULL,NULL,'2016-08-07 17:28:37','2016-08-07 17:28:37');
 
+DROP TABLE IF EXISTS `products`;
 
-DROP TABLE IF EXISTS `users1`;
-
-CREATE TABLE `users1` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `email` varchar(256) DEFAULT NULL,
-  `password` varchar(256) DEFAULT NULL,
-  `url` varchar(256) DEFAULT NULL,
-  `session_id` varchar(256) DEFAULT NULL,
-  `username` varchar(256) DEFAULT NULL,
-  `remember_token` varchar(256) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
+CREATE TABLE `products` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) DEFAULT NULL,
+  `type_id` int(11) DEFAULT NULL,
+  `code` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `quantity_store` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `quantity_export` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `image_url` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO `users1` (`id`, `email`, `password`, `url`, `session_id`, `username`, `remember_token`, `created_at`, `updated_at`)
-VALUES
-  (1,'321432432trantunghn196@gmail.com','123456','tunglaso1',NULL,'tunglaso1',NULL,NULL,NULL),
-  (2,'trantunghn196@gmail.com',NULL,'tunglaso2',NULL,NULL,NULL,'2016-08-07 17:28:37','2016-08-07 17:28:37')
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+DROP TABLE IF EXISTS `devices`;
 
+CREATE TABLE `devices` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `session_id` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `device_id` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci

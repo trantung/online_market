@@ -121,7 +121,6 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		"Ollieread\Multiauth\MultiauthServiceProvider",
-		// "Intervention\Image\ImageServiceProvider",
 		// 'Prototype\ServiceProviders\ExceptionsServiceProvider',
 
 	),

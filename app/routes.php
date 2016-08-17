@@ -44,6 +44,7 @@ Route::group(['prefix' => 'api'], function () {
 	Route::post('/logout', 'LogoutController@logout');
 	Route::get('/register', 'RegisterController@index');
 	Route::post('/register', 'RegisterController@store');
+	Route::post('/check_database_name', 'ApiController@checkDbName');
 	//login by facebook or google->finish
 	Route::post('/login_social', 'LoginController@loginSocial');
 
@@ -145,5 +146,17 @@ Route::group(['prefix' => 'api'], function () {
 	//upload images product
 	Route::post('/upload_image/product', 'ApiUploadController@imageProduct');
 
+	//Route::post('/moMessage', 'ApiSmsController@moMessage');
+	//Route::post('/mtMessage', 'ApiSmsController@mtMessage');
+
+	Route::post('/upload_image/product', 'ApiUploadController@imageProduct');
+
+	Route::post('/upload_image/product', 'ApiUploadController@imageProduct');
+
+	Route::post('/moMessageInt', 'ApiMoController@moMessageInt');
+	Route::post('/moMessageJson', 'ApiMoController@moMessageJson');
+	Route::post('/moMessageJsonAndMT', 'ApiMoController@moMessageJsonAndMT');
+
+	Route::post('/mtMessage', 'ApiMoController@mtMessage');
 
 });

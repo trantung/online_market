@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductImageTable extends Migration {
+class CreateDeviceTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,11 @@ class CreateProductImageTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('product_images', function(Blueprint $table) {
+		Schema::create('devices', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('product_id')->nullable();
-            $table->string('image_url', 256)->nullable();
+            $table->integer('user_id')->nullable();
+            $table->string('session_id', 256)->nullable();
+            $table->string('device_id', 256)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -28,7 +29,7 @@ class CreateProductImageTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::drop('product_images');
+        Schema::drop('devices');
 	}
 
 }

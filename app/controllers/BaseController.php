@@ -14,6 +14,10 @@ class BaseController extends Controller {
 			$this->layout = View::make($this->layout);
 		}
 	}
+	public function successNoData()
+	{
+		return Response::json(["code" => 200,"message" => "success"]);
+	}
 	public function checkUserLoginServe($input)
 	{
 		//email, pass
@@ -21,8 +25,6 @@ class BaseController extends Controller {
 		// $this->query = DB::connection('main_store');
 		// $pdo = DB::connection('main_store')->getPdo();
 		$conn = new mysqli('localhost', 'root', 'root', 'main_store');
-		// Check connection
-		// dd(555);
 		if ($conn->connect_error) {
 		    dd(5666);
 		}

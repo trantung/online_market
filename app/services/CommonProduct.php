@@ -54,6 +54,7 @@ class CommonProduct {
 		foreach ($result as $key => $value) {
 			$value->avatar = url(PRODUCT_UPLOAD . '/' . $value->user_id . '/' . Product::find($value->id)->avatar);
 			$value->block = Common::checkBlackList(Input::get('user_id'), $value->user_id);
+			$value->favorite = CommonFavorite::checkFavoriteLike('User', $value->user_id, TYPE_FAVORITE_LIKE, Input::get('user_id'));
 		}
 		return $result;
 	}
@@ -80,16 +81,19 @@ class CommonProduct {
 	{
 		$input = Input::all();
 		// neu tra ve phone cua user so huu product
-		if(isset($options['user_id'])) {
-			$user = User::find($options['user_id']);	
-		}
+		// if(isset($options['user_id'])) {
+		// 	$user = User::find($options['user_id']);	
+		// }
+
+		$data = CommonProduct::getProduct($options);
 		
-		if(isset($options['user_id']) && isset($options['isPhone']) && count($user) > 0) {
-			$data = ['products' => CommonProduct::getProduct($options), 'phone' => $user->phone];	
-		} 
-		else{
-			$data = CommonProduct::getProduct($options);
-		}
+		// if(isset($options['user_id']) && count($user) > 0) {
+		// 	$data = ['products' => CommonProduct::getProduct($options), 'phone' => $user->phone];	
+		// } 
+		// else{
+		// 	$data = CommonProduct::getProduct($options);
+		// }
+
 		return Common::returnData(200, SUCCESS, $input['user_id'], $input['session_id'], $data);
 	}
 

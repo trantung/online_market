@@ -42,5 +42,8 @@ class ApiExceptionHandler {
     public function handleUserStatusErrorException(){
         return $this->makeJsonResponse(408, "Account has not been activated");
     }
+    public function handleDbNameErrorException(){
+        return $this->makeJsonResponse(203, "Database name has not been exist");
+    }
 
 }

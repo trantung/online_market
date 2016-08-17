@@ -45,7 +45,7 @@ class RegisterController extends ApiController {
 							'mysql' => array(
 								'driver'    => 'mysql',
 								'host'      => 'localhost',
-								'database'  => '".$input['username']."',
+								'database'  => '".$input['database_name']."',
 								'username'  => 'root',
 								'password'  => 'root',
 								'charset'   => 'utf8',
@@ -72,50 +72,48 @@ class RegisterController extends ApiController {
 	}
 	public function store()
 	{
-
-
-		// luu vao db
 		$input = Input::all();
-		// dd(User::all());
-		$array = ['email' => $input['email'], 'url' => $input['username']];
-		// dd(User::all()->toArray());
-		// User::create(array(
-		// 			'email'=>'trantunghn196@gmail.com',
-		// 			// 'password'=>Hash::make('123456'),
-		// 			'url' => 'trantung',)
-		// 	);
-					
-			
-		// User::create($array);
-		//tao folder trung ten $Input['username']
-		// dd('../'.__DIR__	);
 		$url = app_path();
-		// dd($url);
-		if (!file_exists($url . $input['username'])) {
-		    mkdir($url . '/config/' . $input['username'], 0777, true);
+		$array = ['email' => $input['email'], 'db_name' => $input['database_name']];
+		// save vào main_store
+		$password = Hash::make($input['password']);
+		$conn = new mysqli('localhost', 'root', 'root', 'main_store');
+		if ($conn->connect_error) {
+		    die("Connection failed main_store " . $conn->connect_error);
 		}
+		$sql = "INSERT INTO users (email, username, db_name, password, phone)
+			VALUES ('".$input['email']."', '".$input['username']."', '".$input['database_name']."',
+			 '".$password."', '".$input['phone']."')";
+		if ($conn->query($sql) === FALSE) {
+		    dd(1);
+		} 
+		$conn->close();
+		//tạo folder mới có tên = $input['database_name']
+		if (!file_exists($url . $input['database_name'])) {
+		    mkdir($url . '/config/' . $input['database_name'], 0777, true);
+		}
+		//tạo file database.php trong folder vừa tạo
 		$msg = $this->getDefault($input);
-		$path = $url . '/config/' . $input['username'] . '/database.php';
+		$path = $url . '/config/' . $input['database_name'] . '/database.php';
 		$f = fopen($path, "a+");
 		fwrite($f, $msg);
 		fclose($f);
 		chmod($path, 0777);
-		//import db
 		$conn = new mysqli('localhost', 'root', 'root');
 		// Check connection
 		if ($conn->connect_error) {
 		    die("Connection failed: " . $conn->connect_error);
 		} 
-
-		// Create database
-		$sql = "CREATE DATABASE ".$input['username'] . " CHARACTER SET utf8 COLLATE utf8_unicode_ci";
+		// tao database name voi ten = $input['databasename']
+		$sql = "CREATE DATABASE ".$input['database_name'] . " CHARACTER SET utf8 COLLATE utf8_unicode_ci";
 		if ($conn->query($sql) === TRUE) {
 			$conn->query('
 				CREATE TABLE `users` (
 				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				  `email` varchar(256) DEFAULT NULL,
 				  `password` varchar(256) DEFAULT NULL,
-				  `url` varchar(256) DEFAULT NULL,
+				  `phone` varchar(256) DEFAULT NULL,
+				  `db_name` varchar(256) DEFAULT NULL,
 				  `session_id` varchar(256) DEFAULT NULL,
 				  `username` varchar(256) DEFAULT NULL,
 				  `remember_token` varchar(256) DEFAULT NULL,
@@ -124,79 +122,26 @@ class RegisterController extends ApiController {
 				  PRIMARY KEY (`id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 				');
-		    echo "Database created successfully";
 		} else {
 		    echo "Error creating database: " . $conn->error;
 		}
 		$conn->close();
-		// dd(file_get_contents($url .'/main_store_2016-08-07.sql'));
-		$conn = new mysqli('localhost', 'root', 'root', 'tunglaso2');
-		// $conn = new PDO("mysql:host='localhost';dbname='tunglaso2'", 
-	 //        'root', 'root',
-	 //        array(
-	 //            PDO::MYSQL_ATTR_LOCAL_INFILE => true,
-	 //            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-	 //        )
-	 //    );
+		$conn = new mysqli('localhost', 'root', 'root', $input['database_name']);
 		$sql = file_get_contents($url .'/main_store_2016-08-07.sql');
-		// $sql = explode(";", $sql);
-		// dd($sql);
-		// $sql = 'DROP TABLE IF EXISTS users4; CREATE TABLE users4 ( id int(11) unsigned NOT NULL AUTO_INCREMENT, email varchar(256) DEFAULT NULL, password varchar(256) DEFAULT NULL, url varchar(256) DEFAULT NULL, session_id varchar(256) DEFAULT NULL, username varchar(256) DEFAULT NULL, remember_token varchar(256) DEFAULT NULL, created_at datetime DEFAULT NULL, updated_at datetime DEFAULT NULL, PRIMARY KEY (id) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; DROP TABLE IF EXISTS users6; CREATE TABLE users6 ( id int(11) unsigned NOT NULL AUTO_INCREMENT, email varchar(256) DEFAULT NULL, password varchar(256) DEFAULT NULL, url varchar(256) DEFAULT NULL, session_id varchar(256) DEFAULT NULL, username varchar(256) DEFAULT NULL, remember_token varchar(256) DEFAULT NULL, created_at datetime DEFAULT NULL, updated_at datetime DEFAULT NULL, PRIMARY KEY (id) ) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
-		// foreach ($sql as $key => $value) {
-		// 	if ($conn->query($value) === TRUE) {
-
-		// 	    echo "Table MyGuests created successfully";
-		// 	} else {
-		// 	    echo "Error creating table: " . $key;
-		// 	}
-		// }
-			if ($conn->query($sql) === TRUE) {
-
-			    echo "Table MyGuests created successfully";
-			} else {
-			    echo "Error creating table: ";
-			}
-
+		//Tao default database
+		$sql = explode(";", $sql);
+		foreach ($sql as $key => $value) {
+			if ($conn->query($value) === FALSE) {
+			    dd('sai tao moi default db');
+			} 
+		}
+		$sql = "INSERT INTO users (email, username, password, phone)
+			VALUES ('".$input['email']."', '".$input['username']."',
+			 '".$password."', '".$input['phone']."')";
 		$conn->close();
-		// $db = DB::connection("tunglaso2");
-		// dd(133);
-		// dd($db);
-// 		$test = $conn->query('
-// CREATE TABLE `users` (
-//   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-//   `email` varchar(256) DEFAULT NULL,
-//   `password` varchar(256) DEFAULT NULL,
-//   `url` varchar(256) DEFAULT NULL,
-//   `session_id` varchar(256) DEFAULT NULL,
-//   `username` varchar(256) DEFAULT NULL,
-//   `remember_token` varchar(256) DEFAULT NULL,
-//   `created_at` datetime DEFAULT NULL,
-//   `updated_at` datetime DEFAULT NULL,
-//   PRIMARY KEY (`id`)
-// ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-// ');
-		// dd($test);
-		// DB::unprepared(file_get_contents($url .'/main_store_2016-08-07.sql'));
-		// DB::unprepared(file_get_contents($url .'/main_store_2016-08-07.sql'));
-		dd(1);
-		// dd(1);
+		
+		return $this->successNoData();
 
-		// $rules = array(
-  //           'email'      => 'required|email|unique:users',
-  //           'password'   => 'required',
-  //       );
-  //       $input = Input::all();
-  //       $validator = Validator::make($input, $rules);
-  //       if ($validator->fails()) {
-  //           throw new Prototype\Exceptions\UserRegisterException();
-  //       } else {
-  //       	$input['password'] = Hash::make($input['password']);
-  //       	$input['status'] = INACTIVE;
-  //       	$input['type'] = 1;
-		// 	$userId = User::create($input)->id;
-		// 	$sessionId = Common::getSessionId($input, $userId);
-		// 	return Common::returnData(200, SUCCESS, $userId, $sessionId);
-  //       }
 	}
 
 }

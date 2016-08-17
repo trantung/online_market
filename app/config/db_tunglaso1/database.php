@@ -23,7 +23,7 @@
 							'mysql' => array(
 								'driver'    => 'mysql',
 								'host'      => 'localhost',
-								'database'  => 'tunglaso2',
+								'database'  => 'db_tunglaso1',
 								'username'  => 'root',
 								'password'  => 'root',
 								'charset'   => 'utf8',

@@ -17,15 +17,18 @@ class CommonUpload {
 				if ($key == 0) {
 					if($type == 1) {
 						$image = Image::make(sprintf(''.$pathUpload.'/%s', $filename[$key]))
-							->resize(PRODUCT_AVATAR_WIDTH, PRODUCT_AVATAR_HEIGHT)->save();
+							//->resize(PRODUCT_AVATAR_WIDTH, PRODUCT_AVATAR_HEIGHT)
+							->save();
  					} else {
  						$image = Image::make(sprintf(''.$pathUpload.'/%s', $filename[$key]))
-							->resize(USER_AVATAR_WIDTH, USER_AVATAR_HEIGHT)->save();
+							->resize(USER_AVATAR_WIDTH, USER_AVATAR_HEIGHT)
+							->save();
  					}
 				}
 				else {
 					$image = Image::make(sprintf(''.$pathUpload.'/%s', $filename[$key]))
-						->resize(PRODUCT_SLIDE_WIDTH, PRODUCT_SLIDE_HEIGHT)->save();
+						//->resize(PRODUCT_SLIDE_WIDTH, PRODUCT_SLIDE_HEIGHT)
+						->save();
 				}
 				$data[$key] = ['image_url' =>  $filename[$key]];
 

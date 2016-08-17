@@ -132,7 +132,7 @@ Route::group(['prefix' => 'api'], function () {
 	//list products hidden->finish
 	Route::post('/product_hidden', 'ApiProductController@listHidden');
 
-	//list product of account:TODO
+	//list product of account:finish
 	Route::post('/account/{id}', 'ApiProfileController@account');
 	//block account:TODO
 	Route::post('/block/{id}', 'ApiProfileController@block');
